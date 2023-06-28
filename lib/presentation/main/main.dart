@@ -1,7 +1,9 @@
+import 'package:call_recorder/call_recorder_icons.dart';
 import 'package:call_recorder/presentation/call_history/call_history.dart';
 import 'package:call_recorder/presentation/contacts/contacts.dart';
 import 'package:call_recorder/presentation/rec_history/rec_history.dart';
-import 'package:call_recorder/presentation/record/record.dart';
+import 'package:call_recorder/presentation/record_audio/record_audio.dart';
+
 import 'package:call_recorder/presentation/resources/color_manager.dart';
 import 'package:call_recorder/presentation/resources/strings_manager.dart';
 import 'package:call_recorder/presentation/resources/values_manager.dart';
@@ -9,6 +11,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
+import '../record_call/record_call.dart';
 import '../resources/assets_manager.dart';
 
 class MainView extends StatefulWidget {
@@ -25,9 +28,8 @@ class _MainViewState extends State<MainView> {
   List<Widget> _getSliderData() =>
       [
        ContactsView(),
-       RecordView(),
+       RecordAudioView(),
        CallHistoryView(),
-       RecHistoryView()
       ];
 
   void _onItemTapped(int index) {
@@ -40,7 +42,7 @@ class _MainViewState extends State<MainView> {
   Widget build(BuildContext context) {
     return Scaffold(
 
-
+extendBody: true,
       body: _list.elementAt(_currentIndex),
 
       bottomNavigationBar: _getBottomNavigationBar(),
@@ -49,34 +51,60 @@ class _MainViewState extends State<MainView> {
 
 
   Widget _getBottomNavigationBar() {
-    return BottomNavigationBar(items: [
-      BottomNavigationBarItem(
-          icon: SvgPicture.asset(ImageAssets.contactInactiveIc),
-          label: AppStrings.contacts,
-          backgroundColor: ColorManager.white),
-      BottomNavigationBarItem(
-          icon: SvgPicture.asset(ImageAssets.recordInactiveSmallIc,height: AppSize.s16,width: AppSize.s16,color: ColorManager.grey,),
-          label: AppStrings.record,
-          backgroundColor: ColorManager.white),
-      BottomNavigationBarItem(
-          icon: SvgPicture.asset(ImageAssets.callHistoryInactiveIc),
-          label: AppStrings.callHistory,
-          backgroundColor: ColorManager.white),
-      BottomNavigationBarItem(icon: SvgPicture.asset(ImageAssets.contactInactiveIc),
-          label: AppStrings.recordingHistory,
-          backgroundColor: ColorManager.white),
+    return Container(
 
-    ],
-      type: BottomNavigationBarType.shifting,
-      currentIndex: _currentIndex,
 
-    unselectedItemColor: ColorManager.darkGrey,
-    showSelectedLabels: false,
-    selectedIconTheme: IconThemeData(color: ColorManager.primary),
-    selectedItemColor: Colors.red,
-    iconSize: AppSize.s20,
-    onTap: _onItemTapped,
-    elevation: AppSize.s4,);
+        decoration: BoxDecoration(
+        gradient:LinearGradient(
+          colors: [Color(0xffffffff), Color(0xfff8b8cd)],
+          stops: [0.6, 1],
+          begin: Alignment.topCenter,
+          end: Alignment.bottomCenter,
+        ),
+
+            borderRadius: BorderRadius.only(
+            topRight: Radius.circular(AppSize.s28), topLeft: Radius.circular(AppSize.s28)),
+        boxShadow: [
+          BoxShadow(color: Colors.black38, spreadRadius: 0, blurRadius: 10),
+        ],
+      ),
+      child: ClipRRect(
+        borderRadius: const BorderRadius.only(
+          topRight: Radius.circular(AppSize.s28),
+          topLeft: Radius.circular(AppSize.s28),
+        ),
+        child: BottomNavigationBar(items: [
+          BottomNavigationBarItem(
+              icon: SvgPicture.asset(ImageAssets.contactInactiveIc),
+              activeIcon: SvgPicture.asset(ImageAssets.contactActiveIc),
+              label: AppStrings.contacts,
+              backgroundColor: ColorManager.white),
+
+          BottomNavigationBarItem(
+              icon:SvgPicture.asset(ImageAssets.recordInactiveSmallIc),
+              activeIcon: SvgPicture.asset(ImageAssets.recordActiveSmallIc),
+              label: AppStrings.record,
+              backgroundColor: ColorManager.white),
+
+          BottomNavigationBarItem(icon: SvgPicture.asset(ImageAssets.callHistoryInactiveIc),
+              activeIcon: SvgPicture.asset(ImageAssets.callHistoryActiveIc),
+              label: AppStrings.recordingHistory,
+              backgroundColor: ColorManager.white),
+
+        ],
+          type: BottomNavigationBarType.fixed,
+          currentIndex: _currentIndex,
+          backgroundColor: Colors.transparent,
+          unselectedItemColor: ColorManager.darkGrey,
+        showSelectedLabels: false,
+        showUnselectedLabels: false,
+        selectedIconTheme: IconThemeData(color: ColorManager.primary),
+        selectedItemColor: Colors.red,
+        iconSize: AppSize.s20,
+        onTap: _onItemTapped,
+        elevation: AppSize.s8,),
+      ),
+    );
   }
 
 }

@@ -26,8 +26,8 @@ class ImageAssets{
   static const String policyIc = "${IMAGE_PATH}/policy_ic.svg";
   static const String recHistoryInactiveIc = "${IMAGE_PATH}/rec_history_dis_ic.svg";
   static const String recHistoryActiveIc = "${IMAGE_PATH}/rec_history_en_ic.svg";
-  static const String recordInactiveSmallIc = "${IMAGE_PATH}/rec_dis_sm_ic.svg";
-  static const String recordActiveSmallIc = "${IMAGE_PATH}/rec_en_sm_ic.svg";
+  static const String recordInactiveSmallIc = "${IMAGE_PATH}/record_dis_sm_ic.svg";
+  static const String recordActiveSmallIc = "${IMAGE_PATH}/record_en_sm_ic.svg";
   static const String recordIc = "${IMAGE_PATH}/record_ic.svg";
   static const String saveIc = "${IMAGE_PATH}/save_ic.svg";
   static const String saveGDIc = "${IMAGE_PATH}/savegd_ic.svg";
@@ -36,5 +36,10 @@ class ImageAssets{
   static const String stop1Ic = "${IMAGE_PATH}/stop1_ic.svg";
   static const String stop2Ic = "${IMAGE_PATH}/stop2_ic.svg";
   static const String stopWhiteIc = "${IMAGE_PATH}/stop_white_ic.svg";
+
+  static const String soundDotLarge = "${IMAGE_PATH}/sound_dots_large.svg";
+  static const String soundDotSmall = "${IMAGE_PATH}/sound_dots_small.svg";
+  static const String soundWaveBack = "${IMAGE_PATH}/sound_wave_back.svg";
+  static const String recPlayingBack = "${IMAGE_PATH}/rec_playing_back.svg";
 
 }

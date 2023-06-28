@@ -42,6 +42,9 @@ class AppStrings{
   static const String passlevel5 = "Great";
   static const String enterPass = "Enter your password";
   static const String inputEmptyWarning = "*the input field is empty";
+  static const String recordCall = "Record Call";
+  static const String recordAudio = "Record Audio";
+
 
 
 

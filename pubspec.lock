@@ -99,6 +99,14 @@ packages:
     description: flutter
     source: sdk
     version: "0.0.0"
+  gradient_bottom_navigation_bar:
+    dependency: "direct main"
+    description:
+      name: gradient_bottom_navigation_bar
+      sha256: "21830fcf1a2e8c6eb8f40703b68cc2932df1b7cf16ebe04b9d7956c1d7abf78c"
+      url: "https://pub.dev"
+    source: hosted
+    version: "1.0.0+4"
   js:
     dependency: transitive
     description:
