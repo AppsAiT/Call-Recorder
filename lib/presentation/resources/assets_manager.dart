@@ -41,5 +41,6 @@ class ImageAssets{
   static const String soundDotSmall = "${IMAGE_PATH}/sound_dots_small.svg";
   static const String soundWaveBack = "${IMAGE_PATH}/sound_wave_back.svg";
   static const String recPlayingBack = "${IMAGE_PATH}/rec_playing_back.svg";
+  static const String verfBack = "${IMAGE_PATH}/verf_back.svg";
 
 }

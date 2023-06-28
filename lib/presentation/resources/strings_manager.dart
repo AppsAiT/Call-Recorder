@@ -7,7 +7,7 @@ class AppStrings{
   static const String record = "Record";
 
   static const String startRecording = "Start recording";
-  static const String verificationRecord = "Verification record";
+  static const String verificationRecord = "Verification Record";
   static const String callHistory = "Call History";
   static const String recordingHistory = "Recording history";
 
@@ -44,6 +44,10 @@ class AppStrings{
   static const String inputEmptyWarning = "*the input field is empty";
   static const String recordCall = "Record Call";
   static const String recordAudio = "Record Audio";
+
+  static const String enterRecTitleHint = "Enter the title of record";
+
+
 
 
 
