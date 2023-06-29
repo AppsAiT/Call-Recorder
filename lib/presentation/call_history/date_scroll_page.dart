@@ -1,23 +1,23 @@
 import 'package:azlistview/azlistview.dart';
-import 'package:call_recorder/presentation/resources/color_manager.dart';
 import 'package:flutter/material.dart';
 
+import '../resources/color_manager.dart';
 import '../resources/values_manager.dart';
 
-class AlphabetScrollPage extends StatefulWidget {
-  final List<Contact> contactList;
-  final ValueChanged<Contact> onClickedContact;
-  AlphabetScrollPage(this.contactList, this.onClickedContact,{super.key});
+class DateScrollPage extends StatefulWidget {
+
+  final List<ContactHistory> contactList;
+  final ValueChanged<ContactHistory> onClickedContact;
+  DateScrollPage(this.contactList, this.onClickedContact,{super.key});
 
   @override
-  State<AlphabetScrollPage> createState() =>
-      _AlphabetScrollPageState(contactList);
+  State<DateScrollPage> createState() => _DateScrollPageState(contactList);
 }
 
-class _AlphabetScrollPageState extends State<AlphabetScrollPage> {
-  List<Contact> contactList = [];
+class _DateScrollPageState extends State<DateScrollPage> {
+  List<ContactHistory> contactList = [];
 
-  _AlphabetScrollPageState(this.contactList);
+  _DateScrollPageState(this.contactList);
 
   @override
   void initState() {
@@ -26,14 +26,15 @@ class _AlphabetScrollPageState extends State<AlphabetScrollPage> {
     initList(widget.contactList);
   }
 
-  void initList(List<Contact> items) {
+  void initList(List<ContactHistory> items) {
     this.contactList = items
-        .map((contact) => Contact(
-            name: contact.name,
-            mob: contact.mob,
-          // Tag: contact.Tag,
-            Tag: contact.name[0].toUpperCase(),
-            imagePath: contact.imagePath))
+        .map((contact) => ContactHistory(
+        name: contact.name,
+        mob: contact.mob,
+        // Tag: contact.Tag,
+        tag: contact.tag,
+        category: contact.category,
+        imagePath: contact.imagePath))
         .toList();
     SuspensionUtil.sortListBySuspensionTag(this.contactList);
     SuspensionUtil.setShowSuspensionStatus(this.contactList);
@@ -41,8 +42,9 @@ class _AlphabetScrollPageState extends State<AlphabetScrollPage> {
 
   @override
   Widget build(BuildContext context) {
-    return AzListView(
-      padding: EdgeInsets.all(AppPadding.p8),
+    return Expanded(
+      child: AzListView(
+        padding: EdgeInsets.all(AppPadding.p8),
         data: contactList,
         itemCount: contactList.length,
         itemBuilder: (context, index) {
@@ -51,14 +53,15 @@ class _AlphabetScrollPageState extends State<AlphabetScrollPage> {
           return _buildContactCard(contact);
         },
 
-    // indexBarOptions: IndexBarOptions(
-    //   needRebuild: false,
-    //   indexHintAlignment: Alignment.centerRight,
-    // ),
+        // indexBarOptions: IndexBarOptions(
+        //   needRebuild: false,
+        //   indexHintAlignment: Alignment.centerRight,
+        // ),
+      ),
     );
   }
 
-  Widget _buildContactCard(Contact contact) {
+  Widget _buildContactCard(ContactHistory contact) {
     final tag = contact.getSuspensionTag();
     final offstag = !contact.isShowSuspension;
     return Container(
@@ -98,28 +101,34 @@ class _AlphabetScrollPageState extends State<AlphabetScrollPage> {
       ),
     );
   }
-
-  Widget _buildHeader(String tag){
-    return Container(height: 40,alignment: Alignment.centerLeft,child: Text('$tag',softWrap: false,style: Theme.of(context).textTheme.displayLarge,),);
+  Widget _buildHeader(String tag) {
+    return Container(height: 40,
+      alignment: Alignment.centerLeft,
+      child: Text('$tag', softWrap: false, style: Theme
+          .of(context)
+          .textTheme
+          .displayLarge,),);
   }
 }
 
-class Contact extends ISuspensionBean {
+class ContactHistory extends ISuspensionBean {
   //Data Class
   String imagePath;
   String name;
   String mob;
-  String Tag;
+  String category;
+  String tag;
 
-  Contact(
+  ContactHistory(
       {required this.name,
-      required this.mob,
-      required this.Tag,
-      required this.imagePath});
+        required this.mob,
+        required this.category,
+        required this.tag,
+        required this.imagePath});
 
   @override
   String getSuspensionTag() {
     // TODO: implement getSuspensionTag
-    return Tag;
+    return tag;
   }
 }

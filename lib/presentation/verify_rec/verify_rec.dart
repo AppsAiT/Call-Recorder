@@ -1,5 +1,7 @@
+
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+
 import 'package:flutter_svg/flutter_svg.dart';
 
 import '../resources/assets_manager.dart';
@@ -123,6 +125,7 @@ class _VerifyRecViewState extends State<VerifyRecView> {
 
                         });
                       }, icon:  SvgPicture.asset(ImageAssets.playWhiteIc),iconSize: 70,),
+                      //_getSpeedButton(),
                       IconButton(onPressed: (){
                         setState(() {
 
@@ -164,4 +167,59 @@ class _VerifyRecViewState extends State<VerifyRecView> {
       ),
     );
   }
+
+  // Widget _getSpeedButton(){
+  //   return FloatBoxPanel();
+  //   // return SpeedDial(
+  //   //   direction: SpeedDialDirection.up,
+  //   //   icon: SvgPicture.asset(ImageAssets.speedWhiteIc), //icon on Floating action button
+  //   //   activeIcon:SvgPicture.asset(ImageAssets.speedRedIc), //icon when menu is expanded on button
+  //   //   backgroundColor: Colors.white, //background color of button
+  //   //   foregroundColor: Colors.white, //font color, icon color in button
+  //   //   activeBackgroundColor: Colors.deepPurpleAccent, //background color when menu is expanded
+  //   //   activeForegroundColor: Colors.white,
+  //   //   visible: true,
+  //   //   closeManually: false,
+  //   //   curve: Curves.bounceIn,
+  //   //   overlayColor: Colors.black,
+  //   //   overlayOpacity: 0.5, //background layer opacity
+  //   //   onOpen: () => print('OPENING DIAL'), // action when menu opens
+  //   //   onClose: () => print('DIAL CLOSED'), //action when menu closes
+  //   //
+  //   //   elevation: 8.0, //shadow elevation of button
+  //   //   shape: CircleBorder(), //shape of button
+  //   //
+  //   //   children: [
+  //   //     SpeedDialChild( //speed dial child
+  //   //       child: Icon(Icons.accessibility),
+  //   //       backgroundColor: Colors.red,
+  //   //       foregroundColor: Colors.white,
+  //   //       label: 'First Menu Child',
+  //   //       labelStyle: TextStyle(fontSize: 18.0),
+  //   //       onTap: () => print('FIRST CHILD'),
+  //   //       onLongPress: () => print('FIRST CHILD LONG PRESS'),
+  //   //     ),
+  //   //     SpeedDialChild(
+  //   //       child: Icon(Icons.brush),
+  //   //       backgroundColor: Colors.blue,
+  //   //       foregroundColor: Colors.white,
+  //   //       label: 'Second Menu Child',
+  //   //       labelStyle: TextStyle(fontSize: 18.0),
+  //   //       onTap: () => print('SECOND CHILD'),
+  //   //       onLongPress: () => print('SECOND CHILD LONG PRESS'),
+  //   //     ),
+  //   //     SpeedDialChild(
+  //   //       child: Icon(Icons.keyboard_voice),
+  //   //       foregroundColor: Colors.white,
+  //   //       backgroundColor: Colors.green,
+  //   //       label: 'Third Menu Child',
+  //   //       labelStyle: TextStyle(fontSize: 18.0),
+  //   //       onTap: () => print('THIRD CHILD'),
+  //   //       onLongPress: () => print('THIRD CHILD LONG PRESS'),
+  //   //     ),
+  //   //
+  //   //     //add more menu item children here
+  //   //   ],
+  //   // );
+  // }
 }

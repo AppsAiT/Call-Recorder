@@ -41,9 +41,18 @@ class ImageAssets{
   static const String speedWhiteIc = "${IMAGE_PATH}/speed_white_ic.svg";
   static const String speedRedIc = "${IMAGE_PATH}/speed_red_ic.svg";
 
+  static const String cat1Active = "${IMAGE_PATH}/cat_active_tab.svg";
+  static const String cat2Active = "${IMAGE_PATH}/cat2_active.svg";
+  static const String cat3Active = "${IMAGE_PATH}/cat3_active.svg";
+  static const String cat4Active = "${IMAGE_PATH}/cat4_active.svg";
+  static const String cat1Inactive = "${IMAGE_PATH}/cat_inactive.svg";
+  static const String cat2Inactive = "${IMAGE_PATH}/cat2_inactive_tab.svg";
+  static const String cat3Inactive = "${IMAGE_PATH}/cat3_inactive_tab.svg";
+  static const String cat4Inactive = "${IMAGE_PATH}/cat4_inactive_tab.svg";
+
   static const String soundDotLarge = "${IMAGE_PATH}/sound_dots_large.svg";
   static const String soundDotSmall = "${IMAGE_PATH}/sound_dots_small.svg";
-  static const String soundWaveBack = "${IMAGE_PATH}/sound_wave_back.svg";
+  static const String soundWaveBack = "${IMAGE_PATH}/sound_wave_back.png";
   static const String recPlayingBack = "${IMAGE_PATH}/rec_playing_back.svg";
   static const String verfBack = "${IMAGE_PATH}/verf_back.svg";
 

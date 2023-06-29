@@ -30,7 +30,7 @@ class _MainViewState extends State<MainView> {
       [
         ContactsView(),
         RecordAudioView(),
-        VerifyRecView(),
+        CallHistoryView(),
       ];
 
   void _onItemTapped(int index) {
@@ -57,13 +57,13 @@ class _MainViewState extends State<MainView> {
 
       decoration: BoxDecoration(
         gradient:LinearGradient(
-          colors: [Color(0xffffffff), Color(0xfff8b8cd)],
-          stops: [0.6, 1],
+          colors: [Color(0xffffffff), Color(0xff89f2ff)],
+          stops: [0.5, 1],
           begin: Alignment.topCenter,
           end: Alignment.bottomCenter,
         ),
 
-        borderRadius: BorderRadius.only(
+          borderRadius: BorderRadius.only(
             topRight: Radius.circular(AppSize.s28), topLeft: Radius.circular(AppSize.s28)),
         boxShadow: [
           BoxShadow(color: Colors.black38, spreadRadius: 0, blurRadius: 10),
