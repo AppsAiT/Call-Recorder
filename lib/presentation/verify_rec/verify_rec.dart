@@ -31,11 +31,15 @@ class _VerifyRecViewState extends State<VerifyRecView> {
                 end: Alignment.topCenter,
               )),
         ),
-        shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.only(
-                bottomLeft: Radius.circular(AppSize.s28),
-                bottomRight: Radius.circular(AppSize.s28),),),
-        leading: const BackButton(color: Colors.black,),
+        shape: const RoundedRectangleBorder(
+          borderRadius: BorderRadius.only(
+            bottomLeft: Radius.circular(AppSize.s28),
+            bottomRight: Radius.circular(AppSize.s28),
+          ),
+        ),
+        leading: const BackButton(
+          color: Colors.black,
+        ),
         title: Text(
           AppStrings.verificationRecord,
           style: Theme.of(context).textTheme.displayLarge,
@@ -49,7 +53,6 @@ class _VerifyRecViewState extends State<VerifyRecView> {
           statusBarIconBrightness: Brightness.dark,
         ),
       ),
-
       body: Padding(
         padding: const EdgeInsets.all(AppPadding.p12),
         child: Column(
@@ -59,26 +62,44 @@ class _VerifyRecViewState extends State<VerifyRecView> {
               padding: const EdgeInsets.all(AppPadding.p12),
               child: Column(
                 children: [
-                  Row(
+                  const Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      Text("10235624789",style: TextStyle(color: Colors.black,fontSize: FontSize.s20),),
-                      Text("01:02:03",style: TextStyle(color: Colors.grey,fontSize: FontSize.s16),),
+                      Text(
+                        "10235624789",
+                        style: TextStyle(
+                            color: Colors.black, fontSize: FontSize.s20),
+                      ),
+                      Text(
+                        "01:02:03",
+                        style: TextStyle(
+                            color: Colors.grey, fontSize: FontSize.s16),
+                      ),
                     ],
                   ),
-                  SizedBox(height: AppSize.s16,),
+                  const SizedBox(
+                    height: AppSize.s16,
+                  ),
                   TextField(
                     decoration: InputDecoration(
-                      focusedBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.black,width: 1.5),
+                      focusedBorder: OutlineInputBorder(
+                        borderSide:
+                            const BorderSide(color: Colors.black, width: 1.5),
                         borderRadius: BorderRadius.circular(50.0),
                       ),
-                      border: OutlineInputBorder(borderSide: BorderSide(color: Colors.grey,width: 1.5),
+                      border: OutlineInputBorder(
+                        borderSide:
+                            const BorderSide(color: Colors.grey, width: 1.5),
                         borderRadius: BorderRadius.circular(50.0),
                       ),
-                      enabledBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.grey,width: 1),
+                      enabledBorder: OutlineInputBorder(
+                        borderSide:
+                            const BorderSide(color: Colors.grey, width: 1),
                         borderRadius: BorderRadius.circular(50.0),
                       ),
-                      prefix: SizedBox(width: AppSize.s14,),
+                      prefix: const SizedBox(
+                        width: AppSize.s14,
+                      ),
                       filled: true,
                       hintStyle: TextStyle(color: Colors.grey[300]),
                       hintText: AppStrings.enterRecTitleHint,
@@ -91,7 +112,6 @@ class _VerifyRecViewState extends State<VerifyRecView> {
                 ],
               ),
             ),
-
           ],
         ),
       ),
