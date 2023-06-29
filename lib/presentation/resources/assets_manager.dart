@@ -13,7 +13,7 @@ class ImageAssets{
   static const String callWhiteIc = "${IMAGE_PATH}/callWhiteIc.svg";
   static const String contactInactiveIc = "${IMAGE_PATH}/contact_des_ic.svg";
   static const String contactActiveIc = "${IMAGE_PATH}/contact_en_ic.svg";
-  static const String deleteIc = "${IMAGE_PATH}/delete_ic.svg";
+  static const String deleteIc = "${IMAGE_PATH}/deleteIc.svg";
   static const String IncCallIc = "${IMAGE_PATH}/inc_call_ic.svg";
   static const String menuIc = "${IMAGE_PATH}/menu_ic.svg";
   static const String mic2WhiteIc = "${IMAGE_PATH}/mic2_white_ic.svg";
@@ -36,10 +36,6 @@ class ImageAssets{
   static const String stop1Ic = "${IMAGE_PATH}/stop1_ic.svg";
   static const String stop2Ic = "${IMAGE_PATH}/stop2_ic.svg";
   static const String stopWhiteIc = "${IMAGE_PATH}/stop_white_ic.svg";
-  static const String restartIc = "${IMAGE_PATH}/restart_ic.svg";
-  static const String playWhiteIc = "${IMAGE_PATH}/play_white_ic.svg";
-  static const String speedWhiteIc = "${IMAGE_PATH}/speed_white_ic.svg";
-  static const String speedRedIc = "${IMAGE_PATH}/speed_red_ic.svg";
 
   static const String soundDotLarge = "${IMAGE_PATH}/sound_dots_large.svg";
   static const String soundDotSmall = "${IMAGE_PATH}/sound_dots_small.svg";
