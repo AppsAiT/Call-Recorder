@@ -7,6 +7,7 @@ import 'package:call_recorder/presentation/record_audio/record_audio.dart';
 import 'package:call_recorder/presentation/resources/color_manager.dart';
 import 'package:call_recorder/presentation/resources/strings_manager.dart';
 import 'package:call_recorder/presentation/resources/values_manager.dart';
+import 'package:call_recorder/presentation/verify_rec/verify_rec.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_svg/flutter_svg.dart';
@@ -29,7 +30,7 @@ class _MainViewState extends State<MainView> {
       [
        ContactsView(),
        RecordAudioView(),
-       CallHistoryView(),
+       VerifyRecView(),
       ];
 
   void _onItemTapped(int index) {
@@ -95,14 +96,14 @@ extendBody: true,
           type: BottomNavigationBarType.fixed,
           currentIndex: _currentIndex,
           backgroundColor: Colors.transparent,
-          unselectedItemColor: ColorManager.darkGrey,
+          //unselectedItemColor: ColorManager.darkGrey,
         showSelectedLabels: false,
         showUnselectedLabels: false,
-        selectedIconTheme: IconThemeData(color: ColorManager.primary),
-        selectedItemColor: Colors.red,
+        //selectedIconTheme: IconThemeData(color: ColorManager.primary),
+       // selectedItemColor: Colors.red,
         iconSize: AppSize.s20,
         onTap: _onItemTapped,
-        elevation: AppSize.s8,),
+        elevation: AppSize.s0,),
       ),
     );
   }
