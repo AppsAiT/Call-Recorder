@@ -31,7 +31,7 @@ class _VerifyRecViewState extends State<VerifyRecView> {
                 end: Alignment.topCenter,
               )),
         ),
-        shape: const RoundedRectangleBorder(
+        shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.only(
             bottomLeft: Radius.circular(AppSize.s28),
             bottomRight: Radius.circular(AppSize.s28),
@@ -62,7 +62,7 @@ class _VerifyRecViewState extends State<VerifyRecView> {
               padding: const EdgeInsets.all(AppPadding.p12),
               child: Column(
                 children: [
-                  const Row(
+                  Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       Text(
@@ -77,38 +77,85 @@ class _VerifyRecViewState extends State<VerifyRecView> {
                       ),
                     ],
                   ),
-                  const SizedBox(
+                  SizedBox(
                     height: AppSize.s16,
                   ),
-                  TextField(
-                    decoration: InputDecoration(
-                      focusedBorder: OutlineInputBorder(
-                        borderSide:
-                            const BorderSide(color: Colors.black, width: 1.5),
-                        borderRadius: BorderRadius.circular(50.0),
+                  Padding(
+                    padding: const EdgeInsets.only(bottom: AppPadding.p40),
+                    child: TextField(
+                      decoration: InputDecoration(
+                        focusedBorder: OutlineInputBorder(
+                          borderSide: BorderSide(color: Colors.black, width: 1.5),
+                          borderRadius: BorderRadius.circular(50.0),
+                        ),
+                        border: OutlineInputBorder(
+                          borderSide: BorderSide(color: Colors.grey, width: 1.5),
+                          borderRadius: BorderRadius.circular(50.0),
+                        ),
+                        enabledBorder: OutlineInputBorder(
+                          borderSide: BorderSide(color: Colors.grey, width: 1),
+                          borderRadius: BorderRadius.circular(50.0),
+                        ),
+                        prefix: SizedBox(
+                          width: AppSize.s14,
+                        ),
+                        filled: true,
+                        hintStyle: TextStyle(color: Colors.grey[300]),
+                        hintText: AppStrings.enterRecTitleHint,
+                        fillColor: Colors.white70,
                       ),
-                      border: OutlineInputBorder(
-                        borderSide:
-                            const BorderSide(color: Colors.grey, width: 1.5),
-                        borderRadius: BorderRadius.circular(50.0),
-                      ),
-                      enabledBorder: OutlineInputBorder(
-                        borderSide:
-                            const BorderSide(color: Colors.grey, width: 1),
-                        borderRadius: BorderRadius.circular(50.0),
-                      ),
-                      prefix: const SizedBox(
-                        width: AppSize.s14,
-                      ),
-                      filled: true,
-                      hintStyle: TextStyle(color: Colors.grey[300]),
-                      hintText: AppStrings.enterRecTitleHint,
-                      fillColor: Colors.white70,
                     ),
                   ),
-
+                  SizedBox(height: AppSize.s150,),
                   //Audio Player Visuals(Replaced With Temporary Image)
                   SvgPicture.asset(ImageAssets.verfBack),
+                  SizedBox(height: AppSize.s100,),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                    children: [
+                      IconButton(onPressed: (){
+                        setState(() {
+
+                        });
+                      }, icon:  SvgPicture.asset(ImageAssets.restartIc),iconSize: 70,),
+                      IconButton(onPressed: (){
+                        setState(() {
+
+                        });
+                      }, icon:  SvgPicture.asset(ImageAssets.playWhiteIc),iconSize: 70,),
+                      IconButton(onPressed: (){
+                        setState(() {
+
+                        });
+                      }, icon:  SvgPicture.asset(ImageAssets.speedWhiteIc),iconSize: 70,),
+                    ],
+                  ),
+
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      IconButton(onPressed: (){
+                        setState(() {
+
+                        });
+                      }, icon:  SvgPicture.asset(ImageAssets.saveIc),iconSize: AppSize.s40,),
+                      IconButton(onPressed: (){
+                        setState(() {
+
+                        });
+                      }, icon:  SvgPicture.asset(ImageAssets.saveGDIc),iconSize: AppSize.s40,),
+                      IconButton(onPressed: (){
+                        setState(() {
+
+                        });
+                      }, icon:  SvgPicture.asset(ImageAssets.shareIc),iconSize: AppSize.s40,),
+                      IconButton(onPressed: (){
+                        setState(() {
+
+                        });
+                      }, icon:  SvgPicture.asset(ImageAssets.deleteIc),iconSize: AppSize.s40,),
+                    ],
+                  ),
                 ],
               ),
             ),
