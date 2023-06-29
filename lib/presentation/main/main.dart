@@ -26,11 +26,10 @@ class _MainViewState extends State<MainView> {
   int _currentIndex = 0;
   late final List<Widget> _list = _getSliderData();
 
-  List<Widget> _getSliderData() =>
-      [
-       ContactsView(),
-       RecordAudioView(),
-       VerifyRecView(),
+  List<Widget> _getSliderData() => [
+        const ContactsView(),
+        const RecordAudioView(),
+        const VerifyRecView(),
       ];
 
   void _onItemTapped(int index) {
@@ -42,76 +41,83 @@ class _MainViewState extends State<MainView> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-
-extendBody: true,
+      extendBody: true,
       body: _list.elementAt(_currentIndex),
-
       bottomNavigationBar: _getBottomNavigationBar(),
     );
   }
 
-
   Widget _getBottomNavigationBar() {
     return Container(
-
-
-        decoration: BoxDecoration(
-        gradient:LinearGradient(
-          colors: [Color(0xffffffff), Color(0xfff8b8cd)],
-          stops: [0.6, 1],
+      // height: 58,
+      decoration: const BoxDecoration(
+        gradient: LinearGradient(
+          // colors: [Color(0xffffffff), Color(0xfff8b8cd)],
+          colors: [
+            Color.fromARGB(255, 255, 255, 255),
+            Color.fromARGB(255, 216, 172, 172),
+          ],
+          stops: [0.3, 1],
           begin: Alignment.topCenter,
           end: Alignment.bottomCenter,
         ),
-
-            borderRadius: BorderRadius.only(
-            topRight: Radius.circular(AppSize.s28), topLeft: Radius.circular(AppSize.s28)),
+        borderRadius: BorderRadius.only(
+            topRight: Radius.circular(AppSize.s28),
+            topLeft: Radius.circular(AppSize.s28)),
         boxShadow: [
-          BoxShadow(color: Colors.black38, spreadRadius: 0, blurRadius: 10),
+          BoxShadow(
+            color: Color.fromARGB(255, 164, 164, 164),
+            spreadRadius: 0,
+            blurRadius: 2,
+          ),
         ],
       ),
-      child: ClipRRect(
-        borderRadius: const BorderRadius.only(
-          topRight: Radius.circular(AppSize.s28),
-          topLeft: Radius.circular(AppSize.s28),
-        ),
-        child: BottomNavigationBar(items: [
-          BottomNavigationBarItem(
-              icon: SvgPicture.asset(ImageAssets.contactInactiveIc),
-              activeIcon: SvgPicture.asset(ImageAssets.contactActiveIc),
-              label: AppStrings.contacts,
-              backgroundColor: ColorManager.white),
-
-          BottomNavigationBarItem(
-              icon:SvgPicture.asset(ImageAssets.recordInactiveSmallIc),
-              activeIcon: SvgPicture.asset(ImageAssets.recordActiveSmallIc),
-              label: AppStrings.record,
-              backgroundColor: ColorManager.white),
-
-          BottomNavigationBarItem(icon: SvgPicture.asset(ImageAssets.callHistoryInactiveIc),
-              activeIcon: SvgPicture.asset(ImageAssets.callHistoryActiveIc),
-              label: AppStrings.recordingHistory,
-              backgroundColor: ColorManager.white),
-
-        ],
+      // child: ClipRRect(
+      //   borderRadius: const BorderRadius.only(
+      //     topRight: Radius.circular(AppSize.s28),
+      //     topLeft: Radius.circular(AppSize.s28),
+      //   ),
+      child: Container(
+        child: BottomNavigationBar(
+          items: [
+            BottomNavigationBarItem(
+                icon: SvgPicture.asset(ImageAssets.contactInactiveIc),
+                activeIcon: SvgPicture.asset(ImageAssets.contactActiveIc),
+                label: AppStrings.contacts,
+                backgroundColor: ColorManager.white),
+            BottomNavigationBarItem(
+                icon: SvgPicture.asset(ImageAssets.recordInactiveSmallIc),
+                activeIcon: SvgPicture.asset(ImageAssets.recordActiveSmallIc),
+                label: AppStrings.record,
+                backgroundColor: ColorManager.white),
+            BottomNavigationBarItem(
+                icon: SvgPicture.asset(ImageAssets.callHistoryInactiveIc),
+                activeIcon: SvgPicture.asset(ImageAssets.callHistoryActiveIc),
+                label: AppStrings.recordingHistory,
+                backgroundColor: ColorManager.white),
+          ],
           type: BottomNavigationBarType.fixed,
           currentIndex: _currentIndex,
-          backgroundColor: Colors.transparent,
-          //unselectedItemColor: ColorManager.darkGrey,
-        showSelectedLabels: false,
-        showUnselectedLabels: false,
-        //selectedIconTheme: IconThemeData(color: ColorManager.primary),
-       // selectedItemColor: Colors.red,
-        iconSize: AppSize.s20,
-        onTap: _onItemTapped,
-        elevation: AppSize.s0,),
+          backgroundColor: const Color.fromARGB(0, 246, 246, 246),
+          // unselectedItemColor: ColorManager.darkGrey,
+          showSelectedLabels: false,
+          showUnselectedLabels: false,
+          // selectedIconTheme: IconThemeData(color: ColorManager.primary),
+          // selectedItemColor: Colors.red,
+          iconSize: AppSize.s20,
+          onTap: _onItemTapped,
+          // elevation: AppSize.s8,
+          elevation: 0,
+        ),
+        // ),
       ),
     );
   }
-
 }
-class SliderObject{
+
+class SliderObject {
   // Data Class
   String title;
-  
+
   SliderObject(this.title);
 }
