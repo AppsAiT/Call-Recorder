@@ -42,7 +42,6 @@ class _MainViewState extends State<MainView> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-
       extendBody: true,
       body: _list.elementAt(_currentIndex),
 

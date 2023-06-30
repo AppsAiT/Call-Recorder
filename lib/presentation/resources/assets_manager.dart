@@ -2,6 +2,7 @@
 const String IMAGE_PATH = "assets/images";
 class ImageAssets{
   static const String splashLogo = "${IMAGE_PATH}/splash_logo.png";
+  static const String playRecBlueIc = "${IMAGE_PATH}/play_rec_blue_ic.svg";
   static const String aboutIc = "${IMAGE_PATH}/about_ic.svg";
   static const String appIc = "${IMAGE_PATH}/app_ic.svg";
   static const String appLogo = "${IMAGE_PATH}/app_ic.png";
@@ -14,11 +15,13 @@ class ImageAssets{
   static const String contactInactiveIc = "${IMAGE_PATH}/contact_des_ic.svg";
   static const String contactActiveIc = "${IMAGE_PATH}/contact_en_ic.svg";
   static const String deleteIc = "${IMAGE_PATH}/delete_ic.svg";
-  static const String IncCallIc = "${IMAGE_PATH}/inc_call_ic.svg";
+  static const String incCallIc = "${IMAGE_PATH}/inc_call_ic.svg";
   static const String menuIc = "${IMAGE_PATH}/menu_ic.svg";
   static const String mic2WhiteIc = "${IMAGE_PATH}/mic2_white_ic.svg";
   static const String micIc = "${IMAGE_PATH}/mic_ic.svg";
   static const String outcomingIc = "${IMAGE_PATH}/outcoming_ic.svg";
+  static const String missedCallIc = "${IMAGE_PATH}/missed_call_ic.svg";
+  static const String missCallIc = "${IMAGE_PATH}/missed_call_ic.png";
   static const String passwordIc = "${IMAGE_PATH}/password_ic.svg";
   static const String pause1Ic = "${IMAGE_PATH}/pause1_ic.svg";
   static const String pause2Ic = "${IMAGE_PATH}/pause2_ic.svg";

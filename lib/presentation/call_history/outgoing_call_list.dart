@@ -3,15 +3,35 @@ import 'package:flutter/material.dart';
 
 import '../resources/color_manager.dart';
 import '../resources/values_manager.dart';
+import 'date_scroll_page.dart';
 
-class CallHistoryLoader extends StatelessWidget {
-   List<ContactHistory> contactList;
-   ValueChanged<ContactHistory> onClickedContact;
-   CallHistoryLoader(this.contactList,this.onClickedContact,{super.key});
 
- //  getSortedList(contactList);
-  void getSortedList(List<ContactHistory> cont){
-    this.contactList = cont
+class OutgoingCallList extends StatefulWidget {
+  final List<ContactHistory> contactList;
+  final ValueChanged<ContactHistory> onClickedContact;
+  OutgoingCallList(this.contactList, this.onClickedContact,{super.key});
+
+
+  @override
+  State<OutgoingCallList> createState() => _OutgoingCallListState(contactList);
+}
+
+class _OutgoingCallListState extends State<OutgoingCallList> {
+  List<ContactHistory> contactList = [];
+  //StreamController<List<ContactHistory>> _streamController= StreamController<List<ContactHistory>>();
+  _OutgoingCallListState(this.contactList);
+
+  @override
+  void initState() {
+    initList(widget.contactList);
+    // _streamController.sink.add(widget.contactList);
+    // TODO: implement initState
+    super.initState();
+
+  }
+
+  void initList(List<ContactHistory> items) {
+    this.contactList = items
         .map((contact) => ContactHistory(
         name: contact.name,
         mob: contact.mob,
@@ -26,7 +46,6 @@ class CallHistoryLoader extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    //return Center(child:Text(contactList[4].category));
     return Expanded(
       child: AzListView(
         padding: EdgeInsets.all(AppPadding.p8),
@@ -35,13 +54,18 @@ class CallHistoryLoader extends StatelessWidget {
         itemBuilder: (context, index) {
           final contact = contactList[index];
 
-          return _buildContactCard(context,contact);
+          return _buildContactCard(contact);
         },
 
+        // indexBarOptions: IndexBarOptions(
+        //   needRebuild: false,
+        //   indexHintAlignment: Alignment.centerRight,
+        // ),
       ),
     );
   }
-  Widget _buildContactCard(BuildContext context,ContactHistory contact) {
+
+  Widget _buildContactCard(ContactHistory contact) {
     final tag = contact.getSuspensionTag();
     final offstag = !contact.isShowSuspension;
     return Container(
@@ -52,7 +76,7 @@ class CallHistoryLoader extends StatelessWidget {
           Divider(
             thickness: AppSize.s1_5,
           ),
-          Offstage(offstage:offstag,child: _buildHeader(context,tag)),
+          Offstage(offstage:offstag,child: _buildHeader(tag)),
           Divider(
             thickness: AppSize.s1_5,
           ),
@@ -75,41 +99,18 @@ class CallHistoryLoader extends StatelessWidget {
               style: Theme.of(context).textTheme.bodyMedium,
             ),
             trailing: Icon(Icons.call_outlined),
-            onTap: () =>onClickedContact(contact),
+            onTap: () =>widget.onClickedContact(contact),
           ),
         ],
       ),
     );
   }
-  Widget _buildHeader(BuildContext context,String tag) {
+  Widget _buildHeader(String tag) {
     return Container(height: 40,
       alignment: Alignment.centerLeft,
       child: Text('$tag', softWrap: false, style: Theme
           .of(context)
           .textTheme
           .displayLarge,),);
-  }
-}
-
-
-class ContactHistory extends ISuspensionBean {
-  //Data Class
-  String imagePath;
-  String name;
-  String mob;
-  String category;
-  String tag;
-
-  ContactHistory(
-      {required this.name,
-        required this.mob,
-        required this.category,
-        required this.tag,
-        required this.imagePath});
-
-  @override
-  String getSuspensionTag() {
-    // TODO: implement getSuspensionTag
-    return tag;
   }
 }

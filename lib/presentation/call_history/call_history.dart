@@ -2,16 +2,20 @@ import 'dart:async';
 
 import 'package:azlistview/azlistview.dart';
 import 'package:call_recorder/presentation/call_history/date_scroll_page.dart';
-import 'package:call_recorder/presentation/call_history/dates_scroll_page.dart';
+import 'package:call_recorder/presentation/call_history/incoming_call_list.dart';
+import 'package:call_recorder/presentation/call_history/missed_call_list.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_svg/svg.dart';
 
+import '../contacts/contacts.dart';
+import '../record_audio/record_audio.dart';
 import '../resources/assets_manager.dart';
 import '../resources/color_manager.dart';
 import '../resources/route_manager.dart';
 import '../resources/strings_manager.dart';
 import '../resources/values_manager.dart';
+import 'outgoing_call_list.dart';
 
 class CallHistoryView extends StatefulWidget {
    CallHistoryView({super.key});
@@ -22,34 +26,28 @@ class CallHistoryView extends StatefulWidget {
 
 class _CallHistoryViewState extends State<CallHistoryView> {
   List<ContactHistory> _contactList = _getContactHistory();
-  List<ContactHistory> _pList = [];
+
   int _currentIndex = 0;
 
   StreamController<List<ContactHistory>> _streamController= StreamController<List<ContactHistory>>();
   StreamSink<List<ContactHistory>> get _sink => _streamController.sink;
   Stream<List<ContactHistory>> get _stream => _streamController.stream;
+  late final List<Widget> _categoryList = _getSliderData();
+  
 
-  // @override
-  // void initState() {
-  //   // _streamController.sink.add(widget.contactList);
-  //   // TODO: implement initState
-  //   super.initState();
-  //   initList(widget._contactList);
-  // }
-  //
-  // void initList(List<ContactHistory> items) {
-  //   this._contactList = items
-  //       .map((contact) => ContactHistory(
-  //       name: contact.name,
-  //       mob: contact.mob,
-  //       // Tag: contact.Tag,
-  //       tag: contact.tag,
-  //       category: contact.category,
-  //       imagePath: contact.imagePath))
-  //       .toList();
-  //   SuspensionUtil.sortListBySuspensionTag(this._contactList);
-  //   SuspensionUtil.setShowSuspensionStatus(this._contactList);
-  // }
+
+  List<Widget> _getSliderData() {
+    CallList callList = CallList(contactList: _contactList);
+    return  [
+
+      DateScrollPage(_contactList, (value) { }),
+      IncomingCallList(callList._incomingList(), (value) { }),
+      OutgoingCallList(callList._outgoingList(), (value) { }),
+      MissedCallList(callList._missedList(), (value) { }),
+
+    ];
+  }
+
 
   @override
   Widget build(BuildContext context) {
@@ -99,17 +97,7 @@ class _CallHistoryViewState extends State<CallHistoryView> {
           child: Column(
               children: [
               _getCategoryTab(),
-          StreamBuilder(
-              stream: _streamController.stream,
-              builder: (context,AsyncSnapshot snapshot){
-
-                if(!snapshot.hasData){
-                  return Center(child: Text("Contact History Isn Empty"),);
-                }else{
-                  return DateScrollPage(snapshot.data, (value) { print(value);});
-                }
-                
-              }),
+          _categoryList.elementAt(_currentIndex),
           //*****************
       ],
     ),),
@@ -121,21 +109,21 @@ class _CallHistoryViewState extends State<CallHistoryView> {
     setState(() {
       _currentIndex = index;
     });
-      List<ContactHistory> _postList = [];
-      switch(index){
-        case 0:
-          _streamController.sink.add(_contactList);
-          break;
-        case 1:
-          for(int i =0; i<_contactList.length;i++){
-            if(_contactList[i].category == "incoming"){
-              _postList.add(_contactList[index]);
-            }
-          }
-          _streamController.sink.add(_postList);
-          break;
-
-      }
+      // List<ContactHistory> _postList = [];
+      // switch(index){
+      //   case 0:
+      //     _streamController.add(_contactList);
+      //     break;
+      //   case 1:
+      //     for(int i =0; i<_contactList.length;i++){
+      //       if(_contactList[i].category == "incoming"){
+      //         _postList.add(_contactList[index]);
+      //       }
+      //     }
+      //     _streamController.add(_postList);
+      //     break;
+      //
+      // }
 
   }
 
@@ -262,6 +250,8 @@ class _CallHistoryViewState extends State<CallHistoryView> {
         break;
       case 2:
         break;
+      case 3:
+        break;
     }
   }
 }
@@ -271,35 +261,73 @@ class _CallHistoryViewState extends State<CallHistoryView> {
     ContactHistory(name: "John incoming", mob: "0123456789", category: "incoming", tag: "08-02-2023", imagePath: "assets/images/app_ic.png"),
     ContactHistory(name: "John incoming", mob: "0123456789", category: "incoming", tag: "01-02-2023", imagePath: "assets/images/app_ic.png"),
     ContactHistory(name: "John incoming", mob: "0123456789", category: "incoming", tag: "01-02-2023", imagePath: "assets/images/app_ic.png"),
-    ContactHistory(name: "John Wick", mob: "0123456789", category: "outgoing", tag: "01-02-2023", imagePath: "assets/images/app_ic.png"),
-    ContactHistory(name: "John Wick", mob: "0123456789", category: "outgoing", tag: "02-02-2023", imagePath: "assets/images/app_ic.png"),
-    ContactHistory(name: "John Wick", mob: "0123456789", category: "outgoing", tag: "01-02-2023", imagePath: "assets/images/app_ic.png"),
-    ContactHistory(name: "John Wick", mob: "0123456789", category: "outgoing", tag: "17-02-2023", imagePath: "assets/images/app_ic.png"),
-    ContactHistory(name: "John Wick", mob: "0123456789", category: "outgoing", tag: "01-02-2023", imagePath: "assets/images/app_ic.png"),
-    ContactHistory(name: "John Wick", mob: "0123456789", category: "outgoing", tag: "08-02-2023", imagePath: "assets/images/app_ic.png"),
-    ContactHistory(name: "John Wick", mob: "0123456789", category: "outgoing", tag: "02-02-2023", imagePath: "assets/images/app_ic.png"),
-    ContactHistory(name: "John Wick", mob: "0123456789", category: "outgoing", tag: "01-02-2023", imagePath: "assets/images/app_ic.png"),
-    ContactHistory(name: "John Wick", mob: "0123456789", category: "missed", tag: "02-02-2023", imagePath: "assets/images/app_ic.png"),
-    ContactHistory(name: "John Wick", mob: "0123456789", category: "missed", tag: "01-02-2023", imagePath: "assets/images/app_ic.png"),
+    ContactHistory(name: "John outgoing", mob: "0123456789", category: "outgoing", tag: "01-02-2023", imagePath: "assets/images/app_ic.png"),
+    ContactHistory(name: "John outgoing", mob: "0123456789", category: "outgoing", tag: "02-02-2023", imagePath: "assets/images/app_ic.png"),
+    ContactHistory(name: "John outgoing", mob: "0123456789", category: "outgoing", tag: "01-02-2023", imagePath: "assets/images/app_ic.png"),
+    ContactHistory(name: "John outgoing", mob: "0123456789", category: "outgoing", tag: "17-02-2023", imagePath: "assets/images/app_ic.png"),
+    ContactHistory(name: "John outgoing", mob: "0123456789", category: "outgoing", tag: "01-02-2023", imagePath: "assets/images/app_ic.png"),
+    ContactHistory(name: "John outgoing", mob: "0123456789", category: "outgoing", tag: "08-02-2023", imagePath: "assets/images/app_ic.png"),
+    ContactHistory(name: "John outgoing", mob: "0123456789", category: "outgoing", tag: "02-02-2023", imagePath: "assets/images/app_ic.png"),
+    ContactHistory(name: "John outgoing", mob: "0123456789", category: "outgoing", tag: "01-02-2023", imagePath: "assets/images/app_ic.png"),
+    ContactHistory(name: "John missed", mob: "0123456789", category: "missed", tag: "02-02-2023", imagePath: "assets/images/app_ic.png"),
+    ContactHistory(name: "John missed", mob: "0123456789", category: "missed", tag: "01-02-2023", imagePath: "assets/images/app_ic.png"),
     ContactHistory(name: "John incoming", mob: "0123456789", category: "incoming", tag: "01-02-2023", imagePath: "assets/images/app_ic.png"),
-    ContactHistory(name: "John Wick", mob: "0123456789", category: "missed", tag: "07-02-2023", imagePath: "assets/images/app_ic.png"),
-    ContactHistory(name: "John Wick", mob: "0123456789", category: "missed", tag: "05-02-2023", imagePath: "assets/images/app_ic.png"),
+    ContactHistory(name: "John missed", mob: "0123456789", category: "missed", tag: "07-02-2023", imagePath: "assets/images/app_ic.png"),
+    ContactHistory(name: "John missed", mob: "0123456789", category: "missed", tag: "05-02-2023", imagePath: "assets/images/app_ic.png"),
     ContactHistory(name: "John incoming", mob: "0123456789", category: "incoming", tag: "07-02-2023", imagePath: "assets/images/app_ic.png"),
-    ContactHistory(name: "John Wick", mob: "0123456789", category: "missed", tag: "01-02-2023", imagePath: "assets/images/app_ic.png"),
-    ContactHistory(name: "John Wick", mob: "0123456789", category: "outgoing", tag: "09-02-2023", imagePath: "assets/images/app_ic.png"),
+    ContactHistory(name: "John missed", mob: "0123456789", category: "missed", tag: "01-02-2023", imagePath: "assets/images/app_ic.png"),
+    ContactHistory(name: "John outgoing", mob: "0123456789", category: "outgoing", tag: "09-02-2023", imagePath: "assets/images/app_ic.png"),
     ContactHistory(name: "John incoming", mob: "0123456789", category: "incoming", tag: "11-02-2023", imagePath: "assets/images/app_ic.png"),
-    ContactHistory(name: "John Wick", mob: "0123456789", category: "outgoing", tag: "11-02-2023", imagePath: "assets/images/app_ic.png"),
+    ContactHistory(name: "John outgoing", mob: "0123456789", category: "outgoing", tag: "11-02-2023", imagePath: "assets/images/app_ic.png"),
     ContactHistory(name: "John incoming", mob: "0123456789", category: "incoming", tag: "21-02-2023", imagePath: "assets/images/app_ic.png"),
     ContactHistory(name: "John incoming", mob: "0123456789", category: "incoming", tag: "01-02-2023", imagePath: "assets/images/app_ic.png"),
     ContactHistory(name: "John incoming", mob: "0123456789", category: "incoming", tag: "21-02-2023", imagePath: "assets/images/app_ic.png"),
     ContactHistory(name: "John incoming", mob: "0123456789", category: "incoming", tag: "01-02-2023", imagePath: "assets/images/app_ic.png"),
     ContactHistory(name: "John incoming", mob: "0123456789", category: "incoming", tag: "01-02-2023", imagePath: "assets/images/app_ic.png"),
     ContactHistory(name: "John incoming", mob: "0123456789", category: "incoming", tag: "31-02-2023", imagePath: "assets/images/app_ic.png"),
-    ContactHistory(name: "John Wick", mob: "0123456789", category: "outgoing", tag: "09-02-2023", imagePath: "assets/images/app_ic.png"),
+    ContactHistory(name: "John outgoing", mob: "0123456789", category: "outgoing", tag: "09-02-2023", imagePath: "assets/images/app_ic.png"),
     ContactHistory(name: "John incoming", mob: "0123456789", category: "incoming", tag: "11-02-2023", imagePath: "assets/images/app_ic.png"),
     ContactHistory(name: "John incoming", mob: "0123456789", category: "incoming", tag: "08-02-2023", imagePath: "assets/images/app_ic.png"),
     ContactHistory(name: "John incoming", mob: "0123456789", category: "incoming", tag: "01-02-2023", imagePath: "assets/images/app_ic.png"),
-    ContactHistory(name: "John Wick", mob: "0123456789", category: "missed", tag: "05-02-2023", imagePath: "assets/images/app_ic.png"),
-    ContactHistory(name: "John Wick", mob: "0123456789", category: "missed", tag: "31-02-2023", imagePath: "assets/images/app_ic.png"),
+    ContactHistory(name: "John missed", mob: "0123456789", category: "missed", tag: "05-02-2023", imagePath: "assets/images/app_ic.png"),
+    ContactHistory(name: "John missed", mob: "0123456789", category: "missed", tag: "31-02-2023", imagePath: "assets/images/app_ic.png"),
   ];
+
+class CallList{
+  List<ContactHistory> contactList;
+  List<ContactHistory> _incList = [];
+  List<ContactHistory> _outList = [];
+  List<ContactHistory> _misList = [];
+  CallList({required this.contactList });
+
+  List<ContactHistory> _incomingList(){
+    _incList.clear();
+    for(int i =0; i<contactList.length;i++){
+      if(contactList[i].category == "incoming"){
+        _incList.add(contactList[i]);
+      }
+    }
+    return _incList;
+  }
+
+  List<ContactHistory> _outgoingList(){
+    _outList.clear();
+    for(int i =0; i<contactList.length;i++){
+      if(contactList[i].category == "outgoing"){
+        _outList.add(contactList[i]);
+      }
+    }
+    return _outList;
+  }
+
+  List<ContactHistory> _missedList(){
+    _outList.clear();
+    for(int i =0; i<contactList.length;i++){
+      if(contactList[i].category == "missed"){
+        _outList.add(contactList[i]);
+      }
+    }
+    return _outList;
+  }
+}
 

@@ -2,15 +2,16 @@ import 'dart:async';
 
 import 'package:azlistview/azlistview.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 
+import '../resources/assets_manager.dart';
 import '../resources/color_manager.dart';
 import '../resources/values_manager.dart';
-import 'dates_scroll_page.dart';
 
 class DateScrollPage extends StatefulWidget {
 
-  final List<ContactHistory> contactList;
-  final ValueChanged<ContactHistory> onClickedContact;
+   final List<ContactHistory> contactList;
+   final ValueChanged<ContactHistory> onClickedContact;
   DateScrollPage(this.contactList, this.onClickedContact,{super.key});
 
   @override
@@ -24,10 +25,11 @@ class _DateScrollPageState extends State<DateScrollPage> {
 
   @override
   void initState() {
+    initList(widget.contactList);
    // _streamController.sink.add(widget.contactList);
     // TODO: implement initState
     super.initState();
-    initList(widget.contactList);
+
   }
 
   void initList(List<ContactHistory> items) {
@@ -54,18 +56,19 @@ class _DateScrollPageState extends State<DateScrollPage> {
         itemBuilder: (context, index) {
           final contact = contactList[index];
 
-          return _buildContactCard(contact);
+          return _buildCallHistoryCard(contact);
         },
 
-        // indexBarOptions: IndexBarOptions(
-        //   needRebuild: false,
-        //   indexHintAlignment: Alignment.centerRight,
-        // ),
+        indexBarOptions: IndexBarOptions(
+          indexHintWidth: 0,
+          needRebuild: false,
+          indexHintAlignment: Alignment.centerRight,
+        ),
       ),
     );
   }
 
-  Widget _buildContactCard(ContactHistory contact) {
+  Widget _buildCallHistoryCard(ContactHistory contact) {
     final tag = contact.getSuspensionTag();
     final offstag = !contact.isShowSuspension;
     return Container(
@@ -82,23 +85,44 @@ class _DateScrollPageState extends State<DateScrollPage> {
           ),
           ListTile(
             leading: CircleAvatar(
-              maxRadius: AppSize.s28,
+              maxRadius: AppSize.s20,
               minRadius: AppSize.s20,
               //radius: AppSize.s28,
               backgroundImage: AssetImage(contact.imagePath),
             ),
             title: Padding(
               padding: const EdgeInsets.only(bottom: AppPadding.p8),
-              child: Text(
-                contact.name,
-                style: Theme.of(context).textTheme.titleLarge,
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.start,
+                children: [
+                  _getCallCategory(contact.category),
+                  SizedBox(width: AppSize.s8,),
+                  Text(
+                    contact.name,
+                    style: Theme.of(context).textTheme.titleLarge,
+                  ),
+                ],
               ),
             ),
             subtitle: Text(
               contact.mob,
               style: Theme.of(context).textTheme.bodyMedium,
             ),
-            trailing: Icon(Icons.call_outlined),
+            trailing: Container(
+              width: 80,
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.start,
+                children: [
+                  SvgPicture.asset(ImageAssets.playRecBlueIc,height: 30,width: 20,),
+                  Padding(
+                    padding: const EdgeInsets.all(4.0),
+                    child: SvgPicture.asset(ImageAssets.callDarkIc,height: 20,width: 20,),
+                  ),
+                  SvgPicture.asset(ImageAssets.menuIc,height: 20,width: 20,),
+
+                ],
+              ),
+            ),
             onTap: () =>widget.onClickedContact(contact),
           ),
         ],
@@ -113,26 +137,42 @@ class _DateScrollPageState extends State<DateScrollPage> {
           .textTheme
           .displayLarge,),);
   }
+
+  Widget _getCallCategory(String category){
+    switch(category){
+      case "incoming":
+        return SvgPicture.asset(ImageAssets.incCallIc,height: 20,width: 20,);
+        break;
+      case "outgoing":
+        return SvgPicture.asset(ImageAssets.outcomingIc,height: 20,width: 20,);
+        break;
+      case "missed":
+        return SvgPicture.asset(ImageAssets.missedCallIc,height: 20,width: 20,);
+        break;
+      default:
+        return Icon(Icons.call_outlined);
+    }
+  }
 }
-//
-// class ContactHistory extends ISuspensionBean {
-//   //Data Class
-//   String imagePath;
-//   String name;
-//   String mob;
-//   String category;
-//   String tag;
-//
-//   ContactHistory(
-//       {required this.name,
-//         required this.mob,
-//         required this.category,
-//         required this.tag,
-//         required this.imagePath});
-//
-//   @override
-//   String getSuspensionTag() {
-//     // TODO: implement getSuspensionTag
-//     return tag;
-//   }
-// }
+
+class ContactHistory extends ISuspensionBean {
+  //Data Class
+  String imagePath;
+  String name;
+  String mob;
+  String category;
+  String tag;
+
+  ContactHistory(
+      {required this.name,
+        required this.mob,
+        required this.category,
+        required this.tag,
+        required this.imagePath});
+
+  @override
+  String getSuspensionTag() {
+    // TODO: implement getSuspensionTag
+    return tag;
+  }
+}
