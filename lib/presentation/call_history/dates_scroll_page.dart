@@ -1,37 +1,17 @@
-import 'dart:async';
-
 import 'package:azlistview/azlistview.dart';
 import 'package:flutter/material.dart';
 
 import '../resources/color_manager.dart';
 import '../resources/values_manager.dart';
-import 'dates_scroll_page.dart';
 
-class DateScrollPage extends StatefulWidget {
+class CallHistoryLoader extends StatelessWidget {
+   List<ContactHistory> contactList;
+   ValueChanged<ContactHistory> onClickedContact;
+   CallHistoryLoader(this.contactList,this.onClickedContact,{super.key});
 
-  final List<ContactHistory> contactList;
-  final ValueChanged<ContactHistory> onClickedContact;
-  DateScrollPage(this.contactList, this.onClickedContact,{super.key});
-
-  @override
-  State<DateScrollPage> createState() => _DateScrollPageState(contactList);
-}
-
-class _DateScrollPageState extends State<DateScrollPage> {
-  List<ContactHistory> contactList = [];
-  //StreamController<List<ContactHistory>> _streamController= StreamController<List<ContactHistory>>();
-  _DateScrollPageState(this.contactList);
-
-  @override
-  void initState() {
-   // _streamController.sink.add(widget.contactList);
-    // TODO: implement initState
-    super.initState();
-    initList(widget.contactList);
-  }
-
-  void initList(List<ContactHistory> items) {
-    this.contactList = items
+ //  getSortedList(contactList);
+  void getSortedList(List<ContactHistory> cont){
+    this.contactList = cont
         .map((contact) => ContactHistory(
         name: contact.name,
         mob: contact.mob,
@@ -46,6 +26,7 @@ class _DateScrollPageState extends State<DateScrollPage> {
 
   @override
   Widget build(BuildContext context) {
+    //return Center(child:Text(contactList[4].category));
     return Expanded(
       child: AzListView(
         padding: EdgeInsets.all(AppPadding.p8),
@@ -54,18 +35,13 @@ class _DateScrollPageState extends State<DateScrollPage> {
         itemBuilder: (context, index) {
           final contact = contactList[index];
 
-          return _buildContactCard(contact);
+          return _buildContactCard(context,contact);
         },
 
-        // indexBarOptions: IndexBarOptions(
-        //   needRebuild: false,
-        //   indexHintAlignment: Alignment.centerRight,
-        // ),
       ),
     );
   }
-
-  Widget _buildContactCard(ContactHistory contact) {
+  Widget _buildContactCard(BuildContext context,ContactHistory contact) {
     final tag = contact.getSuspensionTag();
     final offstag = !contact.isShowSuspension;
     return Container(
@@ -76,7 +52,7 @@ class _DateScrollPageState extends State<DateScrollPage> {
           Divider(
             thickness: AppSize.s1_5,
           ),
-          Offstage(offstage:offstag,child: _buildHeader(tag)),
+          Offstage(offstage:offstag,child: _buildHeader(context,tag)),
           Divider(
             thickness: AppSize.s1_5,
           ),
@@ -99,13 +75,13 @@ class _DateScrollPageState extends State<DateScrollPage> {
               style: Theme.of(context).textTheme.bodyMedium,
             ),
             trailing: Icon(Icons.call_outlined),
-            onTap: () =>widget.onClickedContact(contact),
+            onTap: () =>onClickedContact(contact),
           ),
         ],
       ),
     );
   }
-  Widget _buildHeader(String tag) {
+  Widget _buildHeader(BuildContext context,String tag) {
     return Container(height: 40,
       alignment: Alignment.centerLeft,
       child: Text('$tag', softWrap: false, style: Theme
@@ -114,25 +90,26 @@ class _DateScrollPageState extends State<DateScrollPage> {
           .displayLarge,),);
   }
 }
-//
-// class ContactHistory extends ISuspensionBean {
-//   //Data Class
-//   String imagePath;
-//   String name;
-//   String mob;
-//   String category;
-//   String tag;
-//
-//   ContactHistory(
-//       {required this.name,
-//         required this.mob,
-//         required this.category,
-//         required this.tag,
-//         required this.imagePath});
-//
-//   @override
-//   String getSuspensionTag() {
-//     // TODO: implement getSuspensionTag
-//     return tag;
-//   }
-// }
+
+
+class ContactHistory extends ISuspensionBean {
+  //Data Class
+  String imagePath;
+  String name;
+  String mob;
+  String category;
+  String tag;
+
+  ContactHistory(
+      {required this.name,
+        required this.mob,
+        required this.category,
+        required this.tag,
+        required this.imagePath});
+
+  @override
+  String getSuspensionTag() {
+    // TODO: implement getSuspensionTag
+    return tag;
+  }
+}

@@ -138,7 +138,9 @@ class _ContactsViewState extends State<ContactsView> {
           ScaffoldMessenger.of(context)
             ..removeCurrentSnackBar()
             ..showSnackBar(snackBar);
-        }));
+        },),
+      bottomNavigationBar: SizedBox(height: 50,),
+    );
   }
 }
 
