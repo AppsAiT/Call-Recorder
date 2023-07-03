@@ -1,3 +1,4 @@
+import 'package:call_recorder/presentation/access/contact_access.dart';
 import 'package:call_recorder/presentation/call_history/call_history.dart';
 import 'package:call_recorder/presentation/contacts/contacts.dart';
 import 'package:call_recorder/presentation/menu/menu.dart';
@@ -31,6 +32,7 @@ class Routes {
   static const String menuPage = "/menuPage";
   static const String callRecPlaying = "/callRecPlaying";
   static const String audioRecord = "/audioRecord";
+  static const String allowAccess = "/allowAccess";
 }
 
 class RouteGenerator {
@@ -62,6 +64,8 @@ class RouteGenerator {
         return MaterialPageRoute(builder: (_) => CallRecPlayView());
       case Routes.audioRecord:
         return MaterialPageRoute(builder: (_) => RecordAudioView());
+      case Routes.allowAccess:
+        return MaterialPageRoute(builder: (_) => AllowAccessView());
       default:
         return unDefinedRoute();
     }

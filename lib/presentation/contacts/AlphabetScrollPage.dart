@@ -1,3 +1,5 @@
+import 'dart:typed_data';
+
 import 'package:azlistview/azlistview.dart';
 import 'package:call_recorder/presentation/resources/color_manager.dart';
 import 'package:flutter/material.dart';
@@ -5,8 +7,8 @@ import 'package:flutter/material.dart';
 import '../resources/values_manager.dart';
 
 class AlphabetScrollPage extends StatefulWidget {
-  final List<Contact> contactList;
-  final ValueChanged<Contact> onClickedContact;
+  final List<ContactSingle> contactList;
+  final ValueChanged<ContactSingle> onClickedContact;
   AlphabetScrollPage(this.contactList, this.onClickedContact,{super.key});
 
   @override
@@ -15,7 +17,7 @@ class AlphabetScrollPage extends StatefulWidget {
 }
 
 class _AlphabetScrollPageState extends State<AlphabetScrollPage> {
-  List<Contact> contactList = [];
+  List<ContactSingle> contactList = [];
 
   _AlphabetScrollPageState(this.contactList);
 
@@ -26,14 +28,14 @@ class _AlphabetScrollPageState extends State<AlphabetScrollPage> {
     initList(widget.contactList);
   }
 
-  void initList(List<Contact> items) {
+  void initList(List<ContactSingle> items) {
     this.contactList = items
-        .map((contact) => Contact(
+        .map((contact) => ContactSingle(
             name: contact.name,
             mob: contact.mob,
           // Tag: contact.Tag,
             Tag: contact.name[0].toUpperCase(),
-            imagePath: contact.imagePath))
+            image: contact.image))
         .toList();
     SuspensionUtil.sortListBySuspensionTag(this.contactList);
     SuspensionUtil.setShowSuspensionStatus(this.contactList);
@@ -58,7 +60,7 @@ class _AlphabetScrollPageState extends State<AlphabetScrollPage> {
     );
   }
 
-  Widget _buildContactCard(Contact contact) {
+  Widget _buildContactCard(ContactSingle contact) {
     final tag = contact.getSuspensionTag();
     final offstag = !contact.isShowSuspension;
     return Container(
@@ -74,11 +76,13 @@ class _AlphabetScrollPageState extends State<AlphabetScrollPage> {
             thickness: AppSize.s1_5,
           ),
           ListTile(
-            leading: CircleAvatar(
-              maxRadius: AppSize.s28,
-              minRadius: AppSize.s20,
-              //radius: AppSize.s28,
-              backgroundImage: AssetImage(contact.imagePath),
+            leading:  (contact.image != null && contact.image.isNotEmpty)
+                ? CircleAvatar(
+              backgroundImage: MemoryImage(contact.image),
+            )
+                : CircleAvatar(
+              child: Text(contact.Tag),
+              backgroundColor: Theme.of(context).colorScheme.secondary,
             ),
             title: Padding(
               padding: const EdgeInsets.only(bottom: AppPadding.p8),
@@ -104,18 +108,18 @@ class _AlphabetScrollPageState extends State<AlphabetScrollPage> {
   }
 }
 
-class Contact extends ISuspensionBean {
+class ContactSingle extends ISuspensionBean {
   //Data Class
-  String imagePath;
+  Uint8List image;
   String name;
   String mob;
   String Tag;
 
-  Contact(
+  ContactSingle(
       {required this.name,
       required this.mob,
       required this.Tag,
-      required this.imagePath});
+      required this.image});
 
   @override
   String getSuspensionTag() {

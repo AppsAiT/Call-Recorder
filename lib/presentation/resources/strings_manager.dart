@@ -3,6 +3,7 @@ class AppStrings{
 
   static const String contacts = "Contacts";
   static const String callRecording = "Call recording";
+  static const String callRecorder = "Call Recorder";
   static const String search = "Search";
   static const String record = "Record";
 
@@ -46,13 +47,21 @@ class AppStrings{
   static const String recordAudio = "Record Audio";
 
   static const String enterRecTitleHint = "Enter the title of record";
-
-
-
-
-
-
-
-
   static const String skip = "Skip";
+
+  //Allow access Dialog Box Strings
+  //Button Text
+  static const String allow = "Allow";
+  static const String deny = "Deny";
+  //title
+  static const String dant = "Don't ask next time";
+  static const String carTitle = "Contact Access Request";
+  static const String clrTitle = "Call Log Access Request";
+  static const String mrTitle = "Microphone Access Request";
+  static const String srTitle = "Storage Access Request";
+  //messages
+  static const String carMessage = "Grant our call recording app access to your phone contacts for accurate caller identification. Tap 'Allow' to enable this feature.";
+  static const String clrMessage = "Grant our call recording app access to your call logs for accurate call recording. Tap 'Allow' to enable this feature.";
+  static const String mrMessage = "Grant our call recording app access to your device's microphone for high-quality call recordings. Tap 'Allow' to enable this feature.";
+  static const String srMessage = "Grant our call recording app access to your device's storage for saving recorded calls. Tap 'Allow' to enable this feature.";
 }

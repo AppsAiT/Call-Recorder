@@ -3,6 +3,7 @@ class Assets {
   Assets._();
 
   static const String assetsImagesAppIc = 'assets/images/app_ic.svg';
+  static const String assetsImagesMissedCallIc = 'assets/images/missed_call_ic.svg';
   static const String fontsMontserratBold = 'assets/fonts/Montserrat-Bold.ttf';
   static const String fontsMontserratLight = 'assets/fonts/Montserrat-Light.ttf';
   static const String fontsMontserratMedium = 'assets/fonts/Montserrat-Medium.ttf';
@@ -38,8 +39,10 @@ class Assets {
   static const String imagesPause1Ic = 'assets/images/pause1_ic.svg';
   static const String imagesPause2Ic = 'assets/images/pause2_ic.svg';
   static const String imagesPauseIc = 'assets/images/pause_ic.svg';
+  static const String imagesPlayRecBlueIc = 'assets/images/play_rec_blue_ic.svg';
   static const String imagesPlayWhiteIc = 'assets/images/play_white_ic.svg';
   static const String imagesPolicyIc = 'assets/images/policy_ic.svg';
+  static const String imagesPowByAppsait = 'assets/images/powByAppsait.svg';
   static const String imagesRecHistoryDisIc = 'assets/images/rec_history_dis_ic.svg';
   static const String imagesRecHistoryEnIc = 'assets/images/rec_history_en_ic.svg';
   static const String imagesRecPlayingBack = 'assets/images/rec_playing_back.svg';
@@ -57,7 +60,6 @@ class Assets {
   static const String imagesSpeedRedIc = 'assets/images/speed_red_ic.svg';
   static const String imagesSpeedWhiteIc = 'assets/images/speed_white_ic.svg';
   static const String imagesSplashBack = 'assets/images/splash_back.png';
-  static const String imagesSplashLogo = 'assets/images/splash_logo.png';
   static const String imagesStop1Ic = 'assets/images/stop1_ic.svg';
   static const String imagesStop2Ic = 'assets/images/stop2_ic.svg';
   static const String imagesStopWhiteIc = 'assets/images/stop_white_ic.svg';

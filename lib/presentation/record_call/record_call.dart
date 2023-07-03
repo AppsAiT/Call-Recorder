@@ -31,11 +31,12 @@ class _RecordCallViewState extends State<RecordCallView> {
     return Scaffold(
       appBar: AppBar(
         flexibleSpace: Container(
+          height: 90,
           decoration: const BoxDecoration(
-              shape: BoxShape.circle,
+
               gradient: LinearGradient(
                 colors: [Color(0xffffffff), Color(0xfff8b8cd)],
-                stops: [0.3, 1],
+                stops: [0.1, 1],
                 begin: Alignment.bottomCenter,
                 end: Alignment.topCenter,
               )),

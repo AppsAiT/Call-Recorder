@@ -8,6 +8,7 @@ class ColorManager{
   static Color primaryOpacity70 = HexColor.fromHex("#B3ED9728");
   static Color background = HexColor.fromHex("#FBFBFE");
   static Color subtitle = HexColor.fromHex("#7B7B7B");
+  static Color splashTitle = HexColor.fromHex("#671F1F");
 
   //New Colors
 

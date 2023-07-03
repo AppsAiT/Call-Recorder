@@ -1,8 +1,9 @@
 
 const String IMAGE_PATH = "assets/images";
 class ImageAssets{
-  static const String splashLogo = "${IMAGE_PATH}/splash_logo.png";
+  static const String splashBackground = "${IMAGE_PATH}/splash_back.png";
   static const String playRecBlueIc = "${IMAGE_PATH}/play_rec_blue_ic.svg";
+  static const String poweredByAppsAit = "${IMAGE_PATH}/powByAppsait.png";
   static const String aboutIc = "${IMAGE_PATH}/about_ic.svg";
   static const String appIc = "${IMAGE_PATH}/app_ic.svg";
   static const String appLogo = "${IMAGE_PATH}/app_ic.png";
@@ -58,5 +59,8 @@ class ImageAssets{
   static const String soundWaveBack = "${IMAGE_PATH}/sound_wave_back.png";
   static const String recPlayingBack = "${IMAGE_PATH}/rec_playing_back.svg";
   static const String verfBack = "${IMAGE_PATH}/verf_back.svg";
+
+  static const String allowBtn = "${IMAGE_PATH}/allow_red_btn.png";
+  static const String denyBtn = "${IMAGE_PATH}/deny_red_btn.svg";
 
 }
