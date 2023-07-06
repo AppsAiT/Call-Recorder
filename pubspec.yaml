@@ -39,6 +39,9 @@ dependencies:
   fluttertoast: ^8.2.2
   record: ^4.4.4
   flutter_sound: ^9.2.13
+#  assets_audio_player: ^3.0.3+3
+#  audio_session: ^0.1.16
+  assets_audio_player: ^3.0.6
 #  path: ^1.8.2
 
   # gradient_bottom_navigation_bar: ^1.0.0+4

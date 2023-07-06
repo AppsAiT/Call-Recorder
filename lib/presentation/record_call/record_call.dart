@@ -1,10 +1,11 @@
-import 'package:call_recorder/presentation/record_call/record_call_playing.dart';
+
+
 import 'package:call_recorder/presentation/resources/font_manager.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_sound/flutter_sound.dart';
 import 'package:flutter_svg/svg.dart';
-import 'package:fluttertoast/fluttertoast.dart';
+
 import 'package:permission_handler/permission_handler.dart';
 import 'package:phone_state/phone_state.dart';
 import 'package:record/record.dart';
@@ -30,7 +31,8 @@ class _RecordCallViewState extends State<RecordCallView> {
   final Record record = Record();
   final FlutterSoundRecorder _flutterSoundRecorder = FlutterSoundRecorder();
 
-  List<Widget> _getCallRecordPages() => [
+  List<Widget> _getCallRecordPages() =>
+      [
         _getRecordCallScr(),
         _getCallRecPlayingScreen(),
       ];
@@ -52,6 +54,7 @@ class _RecordCallViewState extends State<RecordCallView> {
     setStream();
     _flutterSoundRecorder.openRecorder();
   }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -77,7 +80,10 @@ class _RecordCallViewState extends State<RecordCallView> {
         leading: _getPopupMenu(context),
         title: Text(
           AppStrings.recordCall,
-          style: Theme.of(context).textTheme.displayLarge,
+          style: Theme
+              .of(context)
+              .textTheme
+              .displayLarge,
           textAlign: TextAlign.center,
         ),
         backgroundColor: ColorManager.white,
@@ -164,7 +170,10 @@ class _RecordCallViewState extends State<RecordCallView> {
               right: AppPadding.p8),
           child: SvgPicture.asset(
             ImageAssets.recPlayingBack,
-            width: MediaQuery.of(context).size.width,
+            width: MediaQuery
+                .of(context)
+                .size
+                .width,
           ),
         ),
         Padding(
@@ -208,24 +217,30 @@ class _RecordCallViewState extends State<RecordCallView> {
                 width: AppSize.s130,
                 child: FittedBox(
                     child: FloatingActionButton(
-                  onPressed: _startCallRecord,
-                  child: SvgPicture.asset(
-                    ImageAssets.mic2WhiteIc,
-                    height: AppSize.s20,
-                    width: AppSize.s20,
-                  ),
-                  backgroundColor: Colors.blue,
-                ))),
+                      onPressed: _startCallRecord,
+                      child: SvgPicture.asset(
+                        ImageAssets.mic2WhiteIc,
+                        height: AppSize.s20,
+                        width: AppSize.s20,
+                      ),
+                      backgroundColor: Colors.blue,
+                    ))),
             SvgPicture.asset(
               ImageAssets.soundDotLarge,
               height: 200,
-              width: MediaQuery.of(context).size.width,
+              width: MediaQuery
+                  .of(context)
+                  .size
+                  .width,
             ),
           ],
         ),
         Text(
           AppStrings.startRecording,
-          style: Theme.of(context).textTheme.bodyLarge,
+          style: Theme
+              .of(context)
+              .textTheme
+              .bodyLarge,
         )
       ],
     );
@@ -235,11 +250,13 @@ class _RecordCallViewState extends State<RecordCallView> {
     PermissionStatus phoneState = await Permission.phone.status;
 
 
-    if(phoneState.isGranted){
+    if (phoneState.isGranted) {
       setStream();
 
-      if(status == PhoneStateStatus.CALL_STARTED){
-        _flutterSoundRecorder.startRecorder(toFile: '/storage/emulated/0/Download/myFile.wav',codec: Codec.pcm16WAV,audioSource: );
+      if (status == PhoneStateStatus.CALL_STARTED) {
+        _flutterSoundRecorder.startRecorder(
+            toFile: '/storage/emulated/0/Download/myFile.wav',
+            codec: Codec.pcm16WAV,);
         if (await record.hasPermission()) {
           // Start recording
           // await record.start(
@@ -258,20 +275,20 @@ class _RecordCallViewState extends State<RecordCallView> {
           //   fontSize: 16.0,
           // );
         }
-
-
       }
-    }else{
+    } else {
       await Permission.phone.request();
     }
-    Future.delayed(Duration(seconds: 30),() async =>await record.stop());
-    Future.delayed(Duration(seconds: 30),() async =>_flutterSoundRecorder.stopRecorder());
+    Future.delayed(Duration(seconds: 30), () async => await record.stop());
+    Future.delayed(Duration(seconds: 30), () async =>
+        _flutterSoundRecorder.stopRecorder());
   }
 
   Widget _getPopupMenu(BuildContext context) {
     return PopupMenuButton<int>(
       icon: SvgPicture.asset(ImageAssets.menuIc),
-      itemBuilder: (context) => [
+      itemBuilder: (context) =>
+      [
         _getMenuItem(context,
             value: 0,
             route: Routes.changePass,
@@ -299,11 +316,11 @@ class _RecordCallViewState extends State<RecordCallView> {
 
   PopupMenuItem<int> _getMenuItem(BuildContext context,
       {required int value,
-      required String route,
-      required String leadingIcon,
-      required String trailingIcon,
-      required String title,
-      required String subTitle}) {
+        required String route,
+        required String leadingIcon,
+        required String trailingIcon,
+        required String title,
+        required String subTitle}) {
     return PopupMenuItem(
       value: value,
       child: ListTile(
@@ -318,11 +335,17 @@ class _RecordCallViewState extends State<RecordCallView> {
         ),
         title: Text(
           title,
-          style: Theme.of(context).textTheme.titleLarge,
+          style: Theme
+              .of(context)
+              .textTheme
+              .titleLarge,
         ),
         subtitle: Text(
           subTitle,
-          style: Theme.of(context).textTheme.bodyLarge,
+          style: Theme
+              .of(context)
+              .textTheme
+              .bodyLarge,
         ),
         trailing: Padding(
           padding: const EdgeInsets.only(right: AppPadding.p8),
