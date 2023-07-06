@@ -63,4 +63,16 @@ class ImageAssets{
   static const String allowBtn = "${IMAGE_PATH}/allow_red_btn.png";
   static const String denyBtn = "${IMAGE_PATH}/deny_red_btn.svg";
 
+  static const String darkCicle = "${IMAGE_PATH}/dark_circle.svg";
+  static const String lightCicle = "${IMAGE_PATH}/light_circle.svg";
+  static const String settingIc = "${IMAGE_PATH}/setting_inactive.svg";
+
+  static const String themeIc = "${IMAGE_PATH}/theme_ic.svg";
+  static const String autoRecordIc = "${IMAGE_PATH}/auto_rec_ic.svg";
+
+  static const String redTheme = "${IMAGE_PATH}/red_theme_ic.svg";
+  static const String blueTheme = "${IMAGE_PATH}/blue_theme_ic.svg";
+  static const String tick = "${IMAGE_PATH}/tick.svg";
+  static const String untick = "${IMAGE_PATH}/untick.svg";
+
 }

@@ -1,6 +1,7 @@
 import 'dart:async';
 
 import 'package:azlistview/azlistview.dart';
+import 'package:call_recorder/presentation/resources/strings_manager.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
@@ -76,14 +77,14 @@ class _DateScrollPageState extends State<DateScrollPage> {
       color: ColorManager.background,
       child: Column(
         children: [
-          Divider(
-            thickness: AppSize.s1_5,
-          ),
+          // Divider(
+          //   thickness: AppSize.s1_5,
+          // ),
           Offstage(offstage:offstag,child: _buildHeader(tag)),
           Divider(
             thickness: AppSize.s1_5,
           ),
-          ListTile(
+          ExpansionTile(
             leading: CircleAvatar(
               maxRadius: AppSize.s20,
               minRadius: AppSize.s20,
@@ -119,13 +120,42 @@ class _DateScrollPageState extends State<DateScrollPage> {
                     child: SvgPicture.asset(ImageAssets.callDarkIc,height: 20,width: 20,),
                   ),
                   SvgPicture.asset(ImageAssets.menuIc,height: 20,width: 20,),
-
                 ],
               ),
             ),
-            onTap: () =>widget.onClickedContact(contact),
+            //onTap: () =>widget.onClickedContact(contact),
+            children: [
+              Column(children: [
+                Image.asset(ImageAssets.soundWaveBack,height: 100,width: 300,),
+                Row(mainAxisAlignment: MainAxisAlignment.spaceAround,children: [
+                  FloatingActionButton(onPressed: (){},child: SvgPicture.asset(ImageAssets.restartIc),backgroundColor: ColorManager.white,),
+                  FloatingActionButton(onPressed: (){},child: SvgPicture.asset(ImageAssets.playWhiteIc),backgroundColor: ColorManager.white,),
+                  FloatingActionButton(onPressed: (){},child: SvgPicture.asset(ImageAssets.speedWhiteIc),backgroundColor: ColorManager.white,),
+                ],),
+               Row(
+                 mainAxisAlignment: MainAxisAlignment.center,
+                 children: [
+                   _getSmallButton(image: ImageAssets.saveIc, label: AppStrings.saveBtt, onTap: (){}),
+                   _getSmallButton(image: ImageAssets.saveGDIc, label: AppStrings.saveGdBtt, onTap: (){}),
+                   _getSmallButton(image: ImageAssets.shareIc, label: AppStrings.shareBtt, onTap: (){}),
+                   _getSmallButton(image: ImageAssets.deleteIc, label: AppStrings.deleteBtt, onTap: (){}),
+                 ],
+               )
+              ],)
+            ],
           ),
         ],
+      ),
+    );
+  }
+  Widget _getSmallButton({required String image,required String label,required VoidCallback onTap}){
+    return  Padding(
+      padding: const EdgeInsets.only(top: AppPadding.p18,bottom: AppPadding.p12,left: AppPadding.p12,right: AppPadding.p12),
+      child: InkWell(
+        child: Column(children: [SvgPicture.asset(image,height: AppSize.s40,),
+          Text(label,style: TextStyle(color: Colors.grey,fontSize: 12),),
+        ],),
+        onTap: onTap,
       ),
     );
   }

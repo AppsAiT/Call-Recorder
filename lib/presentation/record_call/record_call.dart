@@ -23,17 +23,21 @@ class _RecordCallViewState extends State<RecordCallView> {
   int _currentIndex = 0;
 
   List<Widget> _getCallRecordPages() => [
-    _getRecordCallScr(),
-    _getCallRecPlayingScreen(),
-  ];
+        _getRecordCallScr(),
+        _getCallRecPlayingScreen(),
+      ];
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         flexibleSpace: Container(
-          height: 90,
+          // padding: EdgeInsets.only(bottom: AppPadding.p8),
+          // clipBehavior: Clip.none,
+          height: double.infinity,
           decoration: const BoxDecoration(
-
+              backgroundBlendMode: BlendMode.multiply,
+              //color: Colors.transparent,
               gradient: LinearGradient(
                 colors: [Color(0xffffffff), Color(0xfff8b8cd)],
                 stops: [0.1, 1],
@@ -76,72 +80,97 @@ class _RecordCallViewState extends State<RecordCallView> {
             });
           },
           itemBuilder: (context, index) {
-
-              return _pageLoader(index);
-
-
+            return _pageLoader(index);
           }),
     );
   }
 
-  Widget _pageLoader(int index){
-     switch(index){
-       case 0:
-         return _getRecordCallScr();
-         break;
-       case 1:
+  Widget _pageLoader(int index) {
+    switch (index) {
+      case 0:
+        return _getRecordCallScr();
+        break;
+      case 1:
         return _getCallRecPlayingScreen();
-         break;
-       default:
-         return Container();
+        break;
+      default:
+        return Container();
     }
   }
 
-  Widget _getCallRecPlayingScreen(){
+  Widget _getCallRecPlayingScreen() {
     return Column(
       mainAxisAlignment: MainAxisAlignment.center,
       crossAxisAlignment: CrossAxisAlignment.center,
       children: [
-
-
         Padding(
-          padding: const EdgeInsets.only(top:AppPadding.p8,bottom: AppPadding.p40,),
+          padding: const EdgeInsets.only(
+            top: AppPadding.p8,
+            bottom: AppPadding.p40,
+          ),
           child: Column(
             children: [
-              Text("00 : 52 : 12",style: TextStyle(fontSize: FontSize.s27,color: Colors.black),),
-              SizedBox(height: AppSize.s16,),
-              Text("Jason Williams",style: TextStyle(fontSize: FontSize.s27),),
-              Text("1234567890",style: TextStyle(fontSize: FontSize.s16,color: Colors.grey),),
+              Text(
+                "00 : 52 : 12",
+                style: TextStyle(fontSize: FontSize.s27, color: Colors.black),
+              ),
+              SizedBox(
+                height: AppSize.s16,
+              ),
+              Text(
+                "Jason Williams",
+                style: TextStyle(fontSize: FontSize.s27),
+              ),
+              Text(
+                "1234567890",
+                style: TextStyle(fontSize: FontSize.s16, color: Colors.grey),
+              ),
             ],
           ),
         ),
-
-        SizedBox(height: 50,),
-
+        SizedBox(
+          height: 50,
+        ),
         Padding(
-          padding: const EdgeInsets.only(top: AppPadding.p40,bottom: AppPadding.p40,left: AppPadding.p8,right: AppPadding.p8),
-          child: SvgPicture.asset(ImageAssets.recPlayingBack,width: MediaQuery.of(context).size.width,),
+          padding: const EdgeInsets.only(
+              top: AppPadding.p40,
+              bottom: AppPadding.p40,
+              left: AppPadding.p8,
+              right: AppPadding.p8),
+          child: SvgPicture.asset(
+            ImageAssets.recPlayingBack,
+            width: MediaQuery.of(context).size.width,
+          ),
         ),
         Padding(
           padding: const EdgeInsets.only(top: AppPadding.p40),
           child: Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              IconButton(onPressed: (){}, icon:  SvgPicture.asset(ImageAssets.pause1Ic),iconSize: 70.0,style: IconButton.styleFrom(elevation: AppSize.s4),),
-              IconButton(onPressed: (){
-                setState(() {
-                  _pageController.jumpToPage(0);
-                  _currentIndex--;
-                });
-              }, icon:  SvgPicture.asset(ImageAssets.stop1Ic),iconSize: 100,)
-
-          ],),
+              IconButton(
+                onPressed: () {},
+                icon: SvgPicture.asset(ImageAssets.pause1Ic),
+                iconSize: 70.0,
+                style: IconButton.styleFrom(elevation: AppSize.s4),
+              ),
+              IconButton(
+                onPressed: () {
+                  setState(() {
+                    _pageController.jumpToPage(0);
+                    _currentIndex--;
+                  });
+                },
+                icon: SvgPicture.asset(ImageAssets.stop1Ic),
+                iconSize: 100,
+              )
+            ],
+          ),
         ),
-      ],);
+      ],
+    );
   }
 
-  Widget _getRecordCallScr(){
-
+  Widget _getRecordCallScr() {
     return Column(
       mainAxisAlignment: MainAxisAlignment.center,
       crossAxisAlignment: CrossAxisAlignment.center,
@@ -149,16 +178,19 @@ class _RecordCallViewState extends State<RecordCallView> {
         Stack(
           alignment: AlignmentDirectional.center,
           children: [
-            InkWell(
-                onTap: () => setState(() {
-                  _pageController.jumpToPage(1);
-                  _currentIndex++;
-                }),
-                // onTap: () => Navigator.pushReplacementNamed(
-                //     context, Routes.callRecPlaying),
-                child: SvgPicture.asset(
-                  ImageAssets.recordIc,
-                )),
+            Container(
+                height: AppSize.s130,
+                width: AppSize.s130,
+                child: FittedBox(
+                    child: FloatingActionButton(
+                  onPressed: _startCallRecord,
+                  child: SvgPicture.asset(
+                    ImageAssets.mic2WhiteIc,
+                    height: AppSize.s20,
+                    width: AppSize.s20,
+                  ),
+                  backgroundColor: Colors.blue,
+                ))),
             SvgPicture.asset(
               ImageAssets.soundDotLarge,
               height: 200,
@@ -172,6 +204,10 @@ class _RecordCallViewState extends State<RecordCallView> {
         )
       ],
     );
+  }
+
+  void _startCallRecord(){
+
   }
 
   Widget _getPopupMenu(BuildContext context) {

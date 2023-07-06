@@ -18,7 +18,8 @@ class MenuView extends StatefulWidget {
 class _MenuViewState extends State<MenuView> {
   @override
   Widget build(BuildContext context) {
-    return Scaffold(appBar: AppBar(
+    return Scaffold(
+      appBar: AppBar(
       leading: IconButton(onPressed: () {
         Navigator.pop(context);
       }, icon: SvgPicture.asset(ImageAssets.backIc),),

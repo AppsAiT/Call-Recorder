@@ -43,8 +43,6 @@ class _CallHistoryViewState extends State<CallHistoryView> {
       DateScrollPage(_contactList, (value) { }),
       IncomingCallList(callList._incomingList(), (value) { }),
       OutgoingCallList(callList._outgoingList(), (value) { }),
-      MissedCallList(callList._missedList(), (value) { }),
-
     ];
   }
 
@@ -54,9 +52,9 @@ class _CallHistoryViewState extends State<CallHistoryView> {
     return Scaffold(
       appBar: AppBar(
         flexibleSpace: Container(
-          height: 90,
+          height: double.infinity,
           decoration: const BoxDecoration(
-
+            backgroundBlendMode: BlendMode.multiply,
               gradient: LinearGradient(
                 colors: [Color(0xffffffff), Color(0xfff8b8cd)],
                 stops: [0.1, 1],
@@ -160,11 +158,7 @@ class _CallHistoryViewState extends State<CallHistoryView> {
                 activeIcon: SvgPicture.asset(ImageAssets.cat3Active),
                 label: AppStrings.recordingHistory,
                 backgroundColor: ColorManager.white),
-            BottomNavigationBarItem(
-                icon: SvgPicture.asset(ImageAssets.cat4Inactive),
-                activeIcon: SvgPicture.asset(ImageAssets.cat4Active),
-                label: AppStrings.recordingHistory,
-                backgroundColor: ColorManager.white),
+
           ]),
     );
   }

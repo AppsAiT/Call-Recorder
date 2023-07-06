@@ -5,8 +5,10 @@ import 'package:call_recorder/presentation/rec_history/rec_history.dart';
 import 'package:call_recorder/presentation/record_audio/record_audio.dart';
 
 import 'package:call_recorder/presentation/resources/color_manager.dart';
+import 'package:call_recorder/presentation/resources/route_manager.dart';
 import 'package:call_recorder/presentation/resources/strings_manager.dart';
 import 'package:call_recorder/presentation/resources/values_manager.dart';
+import 'package:call_recorder/presentation/settings/settings.dart';
 import 'package:call_recorder/presentation/verify_rec/verify_rec.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -28,15 +30,18 @@ class _MainViewState extends State<MainView> {
 
   List<Widget> _getSliderData() =>
       [
-        ContactsView(),
-        RecordAudioView(),
+        RecordCallView(),
         CallHistoryView(),
+        SettingsView(),
       ];
 
   void _onItemTapped(int index) {
     setState(() {
       _currentIndex = index;
     });
+    if(index == 2){
+      Navigator.pushReplacementNamed(context, Routes.settings);
+    }
   }
 
   @override
@@ -75,21 +80,20 @@ class _MainViewState extends State<MainView> {
         ),
         child: BottomNavigationBar(items: [
           BottomNavigationBarItem(
-              icon: SvgPicture.asset(ImageAssets.contactInactiveIc),
-              activeIcon: SvgPicture.asset(ImageAssets.contactActiveIc),
-              label: AppStrings.contacts,
-              backgroundColor: ColorManager.white),
-
-          BottomNavigationBarItem(
               icon:SvgPicture.asset(ImageAssets.recordInactiveSmallIc),
               activeIcon: SvgPicture.asset(ImageAssets.recordActiveSmallIc),
               label: AppStrings.record,
-              backgroundColor: ColorManager.white),
+              backgroundColor: Colors.transparent),
 
           BottomNavigationBarItem(icon: SvgPicture.asset(ImageAssets.callHistoryInactiveIc),
               activeIcon: SvgPicture.asset(ImageAssets.callHistoryActiveIc),
               label: AppStrings.recordingHistory,
-              backgroundColor: ColorManager.white),
+              backgroundColor: Colors.transparent),
+          BottomNavigationBarItem(
+              icon: SvgPicture.asset(ImageAssets.settingIc),
+              activeIcon: SvgPicture.asset(ImageAssets.settingIc),
+              label: AppStrings.settings,
+              backgroundColor: Colors.transparent),
 
         ],
           type: BottomNavigationBarType.fixed,

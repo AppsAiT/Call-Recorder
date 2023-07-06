@@ -2,15 +2,26 @@ class AppStrings{
   static const String noRouteFound = "No Route Found";
 
   static const String contacts = "Contacts";
+  static const String settings = "Settings";
   static const String callRecording = "Call recording";
   static const String callRecorder = "Call Recorder";
   static const String search = "Search";
   static const String record = "Record";
+  static const String theme = "Theme";
+  static const String themeSub = "Change application theme";
+  static const String autoRecord = "Auto Record";
+  static const String autoRecordSub = "Call recording automatic settings";
+  static const String autoDelete = "Auto Delete";
+  static const String autoDeleteSub = "Recordings will be deleted after 30 days";
+  static const String notificationControl = "Notification control";
+  static const String floatingIcon = "Floating icon";
 
   static const String startRecording = "Start recording";
   static const String verificationRecord = "Verification Record";
   static const String callHistory = "Call History";
   static const String recordingHistory = "Recording history";
+  static const String automaticRecording = "Automatic Recording";
+  static const String selectTheme = "Select theme";
 
   static const String callHistoryCat1 = "All";
   static const String callHistoryCat2 = "In";
@@ -20,7 +31,7 @@ class AppStrings{
 
   static const String saveBtt = "Save";
   static const String saveGdBtt = "Save GD";
-  static const String ShareBtt = "Share";
+  static const String shareBtt = "Share";
   static const String deleteBtt = "Delete";
 
   static const String about = "About";
@@ -33,6 +44,7 @@ class AppStrings{
   static const String privacyPolicySub = "Statement or legal document";
 
   static const String createNewPass = "Create new password";
+  static const String changePass = "Change Password";
   static const String newPass = "New password";
   static const String currPass = "Current password";
   static const String passSuggestion = "leave balnk to remove password";
@@ -59,9 +71,11 @@ class AppStrings{
   static const String clrTitle = "Call Log Access Request";
   static const String mrTitle = "Microphone Access Request";
   static const String srTitle = "Storage Access Request";
+  static const String ribTitle = "Let app always run in background ?";
   //messages
   static const String carMessage = "Grant our call recording app access to your phone contacts for accurate caller identification. Tap 'Allow' to enable this feature.";
   static const String clrMessage = "Grant our call recording app access to your call logs for accurate call recording. Tap 'Allow' to enable this feature.";
   static const String mrMessage = "Grant our call recording app access to your device's microphone for high-quality call recordings. Tap 'Allow' to enable this feature.";
   static const String srMessage = "Grant our call recording app access to your device's storage for saving recorded calls. Tap 'Allow' to enable this feature.";
+  static const String ribMessage = "Allow call recorder to always run in the background may reduce the battery life.You can always change this later from Settings > Apps";
 }

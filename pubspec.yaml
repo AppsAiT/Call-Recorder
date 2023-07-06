@@ -34,6 +34,8 @@ dependencies:
   flutter_svg: ^2.0.5
   permission_handler: ^10.4.1
   contacts_service: ^0.6.3
+  flutter_background: ^1.2.0
+  phone_state: ^1.0.3
 
   # gradient_bottom_navigation_bar: ^1.0.0+4
   # The following adds the Cupertino Icons font to your application.

@@ -1,14 +1,18 @@
-import 'package:call_recorder/presentation/access/contact_access.dart';
+import 'package:call_recorder/presentation/access/allow_access.dart';
+import 'package:call_recorder/presentation/auto_record/auto_record.dart';
 import 'package:call_recorder/presentation/call_history/call_history.dart';
 import 'package:call_recorder/presentation/contacts/contacts.dart';
 import 'package:call_recorder/presentation/menu/menu.dart';
 import 'package:call_recorder/presentation/new_pass/new_pass.dart';
+import 'package:call_recorder/presentation/password_options/password_options.dart';
 import 'package:call_recorder/presentation/rec_history/rec_history.dart';
 import 'package:call_recorder/presentation/record_audio/record_audio.dart';
 import 'package:call_recorder/presentation/record_call/record_call_playing.dart';
 
 import 'package:call_recorder/presentation/resources/strings_manager.dart';
 import 'package:call_recorder/presentation/search/search.dart';
+import 'package:call_recorder/presentation/settings/settings.dart';
+import 'package:call_recorder/presentation/theme/theme.dart';
 import 'package:call_recorder/presentation/verify_rec/verify_rec.dart';
 import 'package:flutter/material.dart';
 
@@ -33,6 +37,10 @@ class Routes {
   static const String callRecPlaying = "/callRecPlaying";
   static const String audioRecord = "/audioRecord";
   static const String allowAccess = "/allowAccess";
+  static const String settings = "/settingPage";
+  static const String passwordOptions = "/passwordOptionsPage";
+  static const String themeSelction = "/themeSelectionPage";
+  static const String autoRecord = "/autoRecordPage";
 }
 
 class RouteGenerator {
@@ -66,6 +74,14 @@ class RouteGenerator {
         return MaterialPageRoute(builder: (_) => RecordAudioView());
       case Routes.allowAccess:
         return MaterialPageRoute(builder: (_) => AllowAccessView());
+      case Routes.settings:
+        return MaterialPageRoute(builder: (_) => SettingsView());
+      case Routes.passwordOptions:
+        return MaterialPageRoute(builder: (_) => PasswordOptionsView());
+      case Routes.themeSelction:
+        return MaterialPageRoute(builder: (_) => ThemeSelectionView());
+      case Routes.autoRecord:
+        return MaterialPageRoute(builder: (_) => AutoRecordView());
       default:
         return unDefinedRoute();
     }
