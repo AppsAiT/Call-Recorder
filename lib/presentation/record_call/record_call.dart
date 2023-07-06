@@ -2,7 +2,12 @@ import 'package:call_recorder/presentation/record_call/record_call_playing.dart'
 import 'package:call_recorder/presentation/resources/font_manager.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_sound/flutter_sound.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:fluttertoast/fluttertoast.dart';
+import 'package:permission_handler/permission_handler.dart';
+import 'package:phone_state/phone_state.dart';
+import 'package:record/record.dart';
 
 import '../resources/assets_manager.dart';
 import '../resources/color_manager.dart';
@@ -21,12 +26,32 @@ class _RecordCallViewState extends State<RecordCallView> {
   late final List<Widget> _list = _getCallRecordPages();
   PageController _pageController = PageController(initialPage: 0);
   int _currentIndex = 0;
+  PhoneStateStatus status = PhoneStateStatus.NOTHING;
+  final Record record = Record();
+  final FlutterSoundRecorder _flutterSoundRecorder = FlutterSoundRecorder();
 
   List<Widget> _getCallRecordPages() => [
         _getRecordCallScr(),
         _getCallRecPlayingScreen(),
       ];
 
+  void setStream() {
+    PhoneState.phoneStateStream.listen((event) {
+      setState(() {
+        if (event != null) {
+          status = event;
+        }
+      });
+    });
+  }
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    setStream();
+    _flutterSoundRecorder.openRecorder();
+  }
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -206,8 +231,41 @@ class _RecordCallViewState extends State<RecordCallView> {
     );
   }
 
-  void _startCallRecord(){
+  Future<void> _startCallRecord() async {
+    PermissionStatus phoneState = await Permission.phone.status;
 
+
+    if(phoneState.isGranted){
+      setStream();
+
+      if(status == PhoneStateStatus.CALL_STARTED){
+        _flutterSoundRecorder.startRecorder(toFile: '/storage/emulated/0/Download/myFile.wav',codec: Codec.pcm16WAV,audioSource: );
+        if (await record.hasPermission()) {
+          // Start recording
+          // await record.start(
+          //   path: '/storage/emulated/0/Download/myFile.m4a',
+          //   encoder: AudioEncoder.aacLc, // by default
+          //   bitRate: 128000, // by default
+          //   samplingRate: 44100, // by default
+          //
+          // ); Fluttertoast.showToast(
+          //   msg: "Recording HAs been Started",
+          //   toastLength: Toast.LENGTH_SHORT,
+          //   gravity: ToastGravity.CENTER,
+          //   timeInSecForIosWeb: 1,
+          //   backgroundColor: Colors.red,
+          //   textColor: Colors.white,
+          //   fontSize: 16.0,
+          // );
+        }
+
+
+      }
+    }else{
+      await Permission.phone.request();
+    }
+    Future.delayed(Duration(seconds: 30),() async =>await record.stop());
+    Future.delayed(Duration(seconds: 30),() async =>_flutterSoundRecorder.stopRecorder());
   }
 
   Widget _getPopupMenu(BuildContext context) {
