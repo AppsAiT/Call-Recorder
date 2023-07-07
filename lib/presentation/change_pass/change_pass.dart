@@ -22,14 +22,70 @@ class _ChangePassViewState extends State<ChangePassView> {
       appBar: AppBar(
         backgroundColor: Colors.white,
         elevation: AppSize.s0,
-        leading: IconButton(onPressed: () =>
-            Navigator.pushReplacementNamed(context, Routes.passwordOptions),
+        leading: IconButton(
+            onPressed: () =>
+                Navigator.pushReplacementNamed(context, Routes.passwordOptions),
             icon: SvgPicture.asset(ImageAssets.backIc)),
       ),
-      body: Column(children: [
-        
-        Text(AppStrings.changePass,style: TextStyle(fontWeight: FontWeight.w500,color: ColorManager.darkGrey,fontSize: FontSize.s16),)
-      ],),
+      body: Padding(
+        padding: const EdgeInsets.all(AppPadding.p12),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: [
+            Container(
+              width: MediaQuery.of(context).size.width,
+              child: Text(
+                AppStrings.changePass,
+                style: TextStyle(
+                    fontWeight: FontWeight.w500,
+                    color: ColorManager.darkGrey,
+                    fontSize: FontSize.s35),
+                textAlign: TextAlign.center,
+              ),
+            ),
+            _getInputField(title: AppStrings.currPass),
+            SizedBox(height: AppSize.s28,),
+            _getInputField(title: AppStrings.newPass),
+          ],
+        ),
+      ),
+    );
+  }
+  Widget _getInputField({required String title}){
+    return Column(
+      children: [
+        Padding(
+          padding: const EdgeInsets.only(bottom:AppPadding.p12,top: AppPadding.p12,),
+          child: Container(
+              width: MediaQuery.of(context).size.width,
+              child: Text(
+                title,
+                textAlign: TextAlign.start,
+                style: TextStyle(color: Colors.grey),
+              )),
+        ),
+        TextField(
+          decoration: InputDecoration(
+            suffixIcon: Icon(Icons.password),
+            errorBorder: OutlineInputBorder(
+              borderSide: BorderSide(color: Colors.red, width: 1),
+            ),
+            enabledBorder: OutlineInputBorder(
+              borderSide: BorderSide(color: ColorManager.lightGrey, width: 1),
+            ),
+            focusedBorder: OutlineInputBorder(
+              borderSide: BorderSide(color: ColorManager.lightGrey, width: 1),
+            ),
+            focusedErrorBorder: OutlineInputBorder(
+              borderSide: BorderSide(color: ColorManager.lightGrey, width: 1),
+            ),
+            disabledBorder: OutlineInputBorder(
+              borderSide: BorderSide(color: ColorManager.lightGrey, width: 1),
+            ),
+          ),
+        ),
+      ],
     );
   }
 }
