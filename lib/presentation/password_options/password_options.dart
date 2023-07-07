@@ -66,15 +66,15 @@ class _PasswordOptionsViewState extends State<PasswordOptionsView> {
             right: AppPadding.p12),
         child: ListView(
           children: [
-            _getPasswordMenuItem(title: AppStrings.createNewPass),
-            _getPasswordMenuItem(title: AppStrings.changePass),
+            _getPasswordMenuItem(title: AppStrings.createNewPass,route: Routes.newPass),
+            _getPasswordMenuItem(title: AppStrings.changePass,route: Routes.changePass),
           ],
         ),
       ),
     );
   }
 
-  Widget _getPasswordMenuItem({required String title}) {
+  Widget _getPasswordMenuItem({required String title,required String route}) {
     return Column(
       children: [
         ListTile(
@@ -86,11 +86,15 @@ class _PasswordOptionsViewState extends State<PasswordOptionsView> {
             padding: const EdgeInsets.only(right: AppPadding.p8),
             child: SvgPicture.asset(ImageAssets.arrowRight),
           ),
+          onTap: ()=>_onTap(route),
         ),
         Divider(
           thickness: 1,
         )
       ],
     );
+  }
+  void _onTap(String route){
+    Navigator.pushReplacementNamed(context, route);
   }
 }

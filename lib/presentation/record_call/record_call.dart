@@ -31,6 +31,25 @@ class _RecordCallViewState extends State<RecordCallView> {
   final Record record = Record();
   final FlutterSoundRecorder _flutterSoundRecorder = FlutterSoundRecorder();
 
+  static const platform = MethodChannel('com.appsait.call_recorder/call_recorder');
+
+  // Get battery level.
+  String _batteryLevel = 'Unknown battery level.';
+
+  Future<void> _getBatteryLevel() async {
+    String batteryLevel;
+    try {
+      final int result = await platform.invokeMethod('getBatteryLevel');
+      batteryLevel = 'Battery level at $result % .';
+    } on PlatformException catch (e) {
+      batteryLevel = "Failed to get battery level: '${e.message}'.";
+    }
+
+    setState(() {
+      _batteryLevel = batteryLevel;
+    });
+  }
+
   List<Widget> _getCallRecordPages() =>
       [
         _getRecordCallScr(),
@@ -241,47 +260,55 @@ class _RecordCallViewState extends State<RecordCallView> {
               .of(context)
               .textTheme
               .bodyLarge,
-        )
+        ),
+        Text(
+          _batteryLevel,
+          style: Theme
+              .of(context)
+              .textTheme
+              .bodyLarge,
+        ),
       ],
     );
   }
 
   Future<void> _startCallRecord() async {
-    PermissionStatus phoneState = await Permission.phone.status;
-
-
-    if (phoneState.isGranted) {
-      setStream();
-
-      if (status == PhoneStateStatus.CALL_STARTED) {
-        _flutterSoundRecorder.startRecorder(
-            toFile: '/storage/emulated/0/Download/myFile.wav',
-            codec: Codec.pcm16WAV,);
-        if (await record.hasPermission()) {
-          // Start recording
-          // await record.start(
-          //   path: '/storage/emulated/0/Download/myFile.m4a',
-          //   encoder: AudioEncoder.aacLc, // by default
-          //   bitRate: 128000, // by default
-          //   samplingRate: 44100, // by default
-          //
-          // ); Fluttertoast.showToast(
-          //   msg: "Recording HAs been Started",
-          //   toastLength: Toast.LENGTH_SHORT,
-          //   gravity: ToastGravity.CENTER,
-          //   timeInSecForIosWeb: 1,
-          //   backgroundColor: Colors.red,
-          //   textColor: Colors.white,
-          //   fontSize: 16.0,
-          // );
-        }
-      }
-    } else {
-      await Permission.phone.request();
-    }
-    Future.delayed(Duration(seconds: 30), () async => await record.stop());
-    Future.delayed(Duration(seconds: 30), () async =>
-        _flutterSoundRecorder.stopRecorder());
+    _getBatteryLevel();
+    // PermissionStatus phoneState = await Permission.phone.status;
+    //
+    //
+    // if (phoneState.isGranted) {
+    //   setStream();
+    //
+    //   if (status == PhoneStateStatus.CALL_STARTED) {
+    //     _flutterSoundRecorder.startRecorder(
+    //         toFile: '/storage/emulated/0/Download/myFile.wav',
+    //         codec: Codec.pcm16WAV,);
+    //     if (await record.hasPermission()) {
+    //       // Start recording
+    //       // await record.start(
+    //       //   path: '/storage/emulated/0/Download/myFile.m4a',
+    //       //   encoder: AudioEncoder.aacLc, // by default
+    //       //   bitRate: 128000, // by default
+    //       //   samplingRate: 44100, // by default
+    //       //
+    //       // ); Fluttertoast.showToast(
+    //       //   msg: "Recording HAs been Started",
+    //       //   toastLength: Toast.LENGTH_SHORT,
+    //       //   gravity: ToastGravity.CENTER,
+    //       //   timeInSecForIosWeb: 1,
+    //       //   backgroundColor: Colors.red,
+    //       //   textColor: Colors.white,
+    //       //   fontSize: 16.0,
+    //       // );
+    //     }
+    //   }
+    // } else {
+    //   await Permission.phone.request();
+    // }
+    // Future.delayed(Duration(seconds: 30), () async => await record.stop());
+    // Future.delayed(Duration(seconds: 30), () async =>
+    //     _flutterSoundRecorder.stopRecorder());
   }
 
   Widget _getPopupMenu(BuildContext context) {
